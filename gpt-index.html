@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fairweather</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #f5f3ef;
+      color: #222;
+      font-family: 'Georgia', serif;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100vh;
+      background-image: url('images/mist2.png'); /* optional texture */
+      background-size: cover;
+      background-position: center;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.25em;
+      letter-spacing: 1px;
+    }
+
+    p {
+      font-size: 1.25rem;
+      margin: 0.5em auto 2em;
+      max-width: 600px;
+      line-height: 1.5;
+    }
+
+    .links {
+      display: flex;
+      justify-content: center;
+      gap: 2em;
+      flex-wrap: wrap;
+      margin-bottom: 2em;
+    }
+
+    .link-box {
+      padding: 1em 1.5em;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #111;
+      font-weight: bold;
+      transition: transform 0.2s, background 0.3s;
+    }
+
+    .link-box:hover {
+      transform: scale(1.05);
+      background: white;
+    }
+
+    footer {
+      font-size: 0.9rem;
+      opacity: 0.6;
+      margin-top: auto;
+      padding-bottom: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .links {
+        flex-direction: column;
+        gap: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Fairweather</h1>
+    <p>A shared dream between two artists.  
+    A place where magic, memory, and brushstroke meet.</p>
+
+    <div class="links">
+      <a href="https://watcheratthethreshold.github.io/sketchy-ponderings/" class="link-box">Sketchy Ponderings</a>
+      <a href="https://watcheratthethreshold.github.io/the-second-gaze/" class="link-box">The Second Gaze</a>
+      <a href="gallery.html" class="link-box">Explore Fairweather</a> <!-- you can later make gallery.html or about.html -->
+    </div>
+  </main>
+
+  <footer>© 2025 Fairweather | Jessop & Shannon Hunt</footer>
+</body>
+</html>
