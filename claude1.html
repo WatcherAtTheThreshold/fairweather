@@ -28,7 +28,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.12;
+            opacity: 0.4;
             background-size: cover;
             background-position: center;
             animation: mistFloat 25s ease-in-out infinite;
@@ -42,7 +42,7 @@
         .mist-2 {
             background-image: url('images/mist2.webp');
             animation-delay: -12s;
-            opacity: 0.08;
+            opacity: 0.3;
         }
 
         @keyframes mistFloat {
@@ -364,12 +364,13 @@
                 grid-template-columns: 1fr;
             }
             
+            /* Hide Ishtar on mobile, show only Inanna full width */
             .hero-image.left {
-                clip-path: polygon(0 0, 100% 0, 100% 45%, 0 65%);
+                clip-path: none;
             }
             
             .hero-image.right {
-                clip-path: polygon(0 35%, 100% 55%, 100% 100%, 0 100%);
+                display: none;
             }
             
             .nav-links {
@@ -400,13 +401,13 @@
                 padding: 0 1rem;
             }
             
-            /* More generous mobile clipping for smaller screens */
+            /* Keep Inanna full width on small screens too */
             .hero-image.left {
-                clip-path: polygon(0 0, 100% 0, 100% 40%, 0 60%);
+                clip-path: none;
             }
             
             .hero-image.right {
-                clip-path: polygon(0 40%, 100% 60%, 100% 100%, 0 100%);
+                display: none;
             }
             
             .nav-links {
