@@ -364,9 +364,9 @@
                 grid-template-columns: 1fr;
             }
             
-            /* Hide Ishtar on mobile, show only Inanna full width */
+            /* Hide Ishtar on mobile, give Inanna diagonal styling */
             .hero-image.left {
-                clip-path: none;
+                clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
             }
             
             .hero-image.right {
@@ -401,9 +401,9 @@
                 padding: 0 1rem;
             }
             
-            /* Keep Inanna full width on small screens too */
+            /* Keep Inanna with diagonal styling on small screens too */
             .hero-image.left {
-                clip-path: none;
+                clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);
             }
             
             .hero-image.right {
@@ -429,7 +429,7 @@
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#gallery">Gallery</a>
-           <!-- <a href="#artists">Artists</a> -->
+            <!-- <a href="#artists">Artists</a> -->
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
         </div>
