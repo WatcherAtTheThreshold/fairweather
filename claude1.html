@@ -364,9 +364,9 @@
                 grid-template-columns: 1fr;
             }
             
-            /* Hide Ishtar on mobile, give Inanna diagonal styling */
+            /* Hide Ishtar on mobile, give Inanna reclined diagonal cut */
             .hero-image.left {
-                clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+                clip-path: polygon(0 0, 100% 0, 50% 100%, 0 100%);
             }
             
             .hero-image.right {
@@ -401,9 +401,9 @@
                 padding: 0 1rem;
             }
             
-            /* Keep Inanna with diagonal styling on small screens too */
+            /* Keep Inanna with reclined diagonal on small screens */
             .hero-image.left {
-                clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);
+                clip-path: polygon(0 0, 100% 0, 45% 100%, 0 100%);
             }
             
             .hero-image.right {
@@ -425,11 +425,10 @@
     <div class="mist-layer mist-1"></div>
     <div class="mist-layer mist-2"></div>
     
-    <nav>
+            <nav>
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#gallery">Gallery</a>
-            <!-- <a href="#artists">Artists</a> -->
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
         </div>
@@ -450,7 +449,6 @@
             </p>
             <div class="hero-cta">
                 <a href="#gallery" class="cta-btn">Explore Gallery</a>
-               <!-- <a href="#artists" class="cta-btn outline">Meet the Artists</a> -->
             </div>
         </div>
         <div class="scroll-indicator">
