@@ -365,11 +365,11 @@
             }
             
             .hero-image.left {
-                clip-path: polygon(0 0, 100% 0, 100% 50%, 0 70%);
+                clip-path: polygon(0 0, 100% 0, 100% 45%, 0 65%);
             }
             
             .hero-image.right {
-                clip-path: polygon(0 30%, 100% 50%, 100% 100%, 0 100%);
+                clip-path: polygon(0 35%, 100% 55%, 100% 100%, 0 100%);
             }
             
             .nav-links {
@@ -383,6 +383,39 @@
             
             .cta-btn {
                 width: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .hero-description {
+                font-size: 0.95rem;
+                padding: 0 1rem;
+            }
+            
+            /* More generous mobile clipping for smaller screens */
+            .hero-image.left {
+                clip-path: polygon(0 0, 100% 0, 100% 40%, 0 60%);
+            }
+            
+            .hero-image.right {
+                clip-path: polygon(0 40%, 100% 60%, 100% 100%, 0 100%);
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.95rem;
+            }
+            
+            nav {
+                padding: 0.8rem 1rem;
             }
         }
     </style>
@@ -404,7 +437,7 @@
     <section class="hero">
         <div class="hero-background">
             <img src="images/under-the-aegis-of-inanna.webp" alt="Under the Aegis of Inanna" class="hero-image left">
-            <img src="images/under-the-aegis-of-ishtarr.webp" alt="Under the Aegis of Ishtar" class="hero-image right">
+            <img src="images/under-the-aegis-of-ishtar.webp" alt="Under the Aegis of Ishtar" class="hero-image right">
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
@@ -416,7 +449,7 @@
             </p>
             <div class="hero-cta">
                 <a href="#gallery" class="cta-btn">Explore Gallery</a>
-               <!-- <a href="#artists" class="cta-btn outline">Meet the Artists</a> -->
+                <a href="#artists" class="cta-btn outline">Meet the Artists</a>
             </div>
         </div>
         <div class="scroll-indicator">
