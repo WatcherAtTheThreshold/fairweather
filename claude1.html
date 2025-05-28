@@ -511,7 +511,7 @@
             });
         });
 
-        // Ultra-smooth parallax effect
+        // Minimal parallax - keep hero images static, gentle mist only
         let lastScrollY = 0;
         let ticking = false;
         
@@ -519,26 +519,19 @@
             const scrolled = window.pageYOffset;
             const mist1 = document.querySelector('.mist-1');
             const mist2 = document.querySelector('.mist-2');
-            const heroImages = document.querySelectorAll('.hero-image');
             
             // Only update if scroll position actually changed
             if (lastScrollY !== scrolled) {
-                // Gentle mist movement
+                // Only move the mist layers gently
                 if (mist1) {
-                    mist1.style.transform = `translate3d(0, ${scrolled * 0.05}px, 0)`;
-                    mist1.style.willChange = 'transform';
+                    mist1.style.transform = `translate3d(0, ${scrolled * 0.03}px, 0)`;
                 }
                 if (mist2) {
-                    mist2.style.transform = `translate3d(0, ${scrolled * 0.03}px, 0)`;
-                    mist2.style.willChange = 'transform';
+                    mist2.style.transform = `translate3d(0, ${scrolled * 0.02}px, 0)`;
                 }
                 
-                // Very gentle hero image movement - no bouncing
-                heroImages.forEach((img, index) => {
-                    const speed = index === 0 ? 0.08 : 0.06;
-                    img.style.transform = `translate3d(0, ${scrolled * speed}px, 0)`;
-                    img.style.willChange = 'transform';
-                });
+                // Hero images stay completely static - no movement at all
+                // This preserves the powerful gaze and eliminates jumpiness
                 
                 lastScrollY = scrolled;
             }
