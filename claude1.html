@@ -511,21 +511,49 @@
             });
         });
 
-        // Parallax effect for mist and hero images
-        window.addEventListener('scroll', () => {
+        // Ultra-smooth parallax effect
+        let lastScrollY = 0;
+        let ticking = false;
+        
+        function smoothParallax() {
             const scrolled = window.pageYOffset;
             const mist1 = document.querySelector('.mist-1');
             const mist2 = document.querySelector('.mist-2');
             const heroImages = document.querySelectorAll('.hero-image');
             
-            if (mist1) mist1.style.transform = `translateY(${scrolled * 0.15}px)`;
-            if (mist2) mist2.style.transform = `translateY(${scrolled * 0.1}px)`;
+            // Only update if scroll position actually changed
+            if (lastScrollY !== scrolled) {
+                // Gentle mist movement
+                if (mist1) {
+                    mist1.style.transform = `translate3d(0, ${scrolled * 0.05}px, 0)`;
+                    mist1.style.willChange = 'transform';
+                }
+                if (mist2) {
+                    mist2.style.transform = `translate3d(0, ${scrolled * 0.03}px, 0)`;
+                    mist2.style.willChange = 'transform';
+                }
+                
+                // Very gentle hero image movement - no bouncing
+                heroImages.forEach((img, index) => {
+                    const speed = index === 0 ? 0.08 : 0.06;
+                    img.style.transform = `translate3d(0, ${scrolled * speed}px, 0)`;
+                    img.style.willChange = 'transform';
+                });
+                
+                lastScrollY = scrolled;
+            }
             
-            heroImages.forEach((img, index) => {
-                const speed = index === 0 ? 0.5 : -0.3;
-                img.style.transform = `translateY(${scrolled * speed}px) scale(${1 + scrolled * 0.0002})`;
-            });
-        });
+            ticking = false;
+        }
+        
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(smoothParallax);
+                ticking = true;
+            }
+        }
+        
+        window.addEventListener('scroll', requestTick, { passive: true });
 
         // Hide scroll indicator after scrolling
         window.addEventListener('scroll', () => {
