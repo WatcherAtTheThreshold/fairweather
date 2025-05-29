@@ -369,7 +369,7 @@
             .hero-image.left {
                 clip-path: ellipse(543px 654px at 12% 23%);
                 object-position: left center; /* Add this line */
-                margin-right: 60px;
+                    transform: translateX(-15px); /* Add this line, adjust value as needed */
             }
             
             .hero-image.right {
@@ -388,6 +388,7 @@
             .cta-btn {
                 width: 200px;
               padding: 1rem 2rem;
+                 transform: translateY(-15px); /* Add this line, adjust value as needed */
             }
         
         }
@@ -410,6 +411,7 @@
             /* Keep Inanna with reclined diagonal on small screens */
             .hero-image.left {
                 clip-path: ellipse(432px 543px at 12% 23%);
+              transform: translateX(-20px); /* Add this line, adjust value as needed */
             }
             
             .hero-image.right {
@@ -427,6 +429,7 @@
           .cta-btn {
                 width: 180px;
               padding: 1rem 2rem;
+                transform: translateY(-15px); /* Add this line, adjust value as needed */
             }
         }
     </style>
