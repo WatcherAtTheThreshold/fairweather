@@ -297,7 +297,12 @@
             font-style: italic;
         }
 
-        footer {
+        
+footer {
+    margin-bottom: 5rem;
+}
+
+footer {
             background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(15px);
             padding: 3rem 2rem;
@@ -472,6 +477,17 @@
     z-index: 200;
     text-align: center;
 }
+
+.sticky-gallery-button {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
 </style>
 </head>
 <body>
@@ -568,9 +584,8 @@
                 </div>
             </div>
         </section>
+</main>
 <div class="sticky-gallery-button"><a href="#gallery" class="cta-btn">Gallery</a></div>
-
-    </main>
 
     <footer>
         <div class="footer-links">
