@@ -477,6 +477,12 @@
         display: none;
     }
 }
+
+@media (max-height: 500px) and (max-width: 1024px) {
+    .hero-content {
+        transform: translateY(-50px);
+    }
+}
 </style>
 </head>
 <body>
@@ -639,6 +645,21 @@
         window.addEventListener('scroll', requestTick, { passive: true });
 
         // Hide scroll indicator after scrolling
+        // Hide gallery button on scroll
+        window.addEventListener('scroll', () => {
+            const galleryBtn = document.querySelector('.cta-btn[href="#gallery"]');
+            if (galleryBtn) {
+                galleryBtn.style.opacity = (window.scrollY > 50) ? '0' : '1';
+                galleryBtn.style.transition = 'opacity 0.4s ease';
+            }
+
+            const label = document.querySelector('.mobile-gallery-label');
+            if (label) {
+                label.style.opacity = (window.scrollY > 50) ? '0' : '1';
+                label.style.transition = 'opacity 0.4s ease';
+            }
+        });
+
         window.addEventListener('scroll', () => {
             const indicator = document.querySelector('.scroll-indicator');
             if (window.scrollY > 100) {
