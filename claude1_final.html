@@ -452,7 +452,16 @@
         display: none;
     }
 
-    .mobile-gallery-label {
+    @keyframes gentleBob {
+    0%, 100% {
+        transform: translate(-50%, 0);
+    }
+    50% {
+        transform: translate(-50%, -6px);
+    }
+}
+
+.mobile-gallery-label {
     display: block;
     position: absolute;
     bottom: 2rem;
@@ -460,11 +469,12 @@
     transform: translateX(-50%);
     color: #deb887;
     font-size: 1.2rem;
-    animation: bounce 2s infinite;
+    animation: gentleBob 4s ease-in-out infinite;
     z-index: 10;
     text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
     letter-spacing: 0.2rem;
-  }
+}
+
 }
 
 @media (min-width: 769px) {
