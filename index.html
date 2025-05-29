@@ -246,23 +246,20 @@
             60% { transform: translate(-50%, -3px); }
         }
 
-        /* Sticky Gallery Button */
+        /* Sticky Gallery Button - positioned between collection and footer */
         .sticky-gallery-button {
-            position: fixed;
-            bottom: 1.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 200;
+            position: relative;
             text-align: center;
-            opacity: 0;
-            transition: opacity 0.4s ease;
+            padding: 3rem 0;
+            z-index: 10;
+            display: none; /* Hidden by default */
         }
 
         /* Content sections */
         .content-section {
             position: relative;
             z-index: 5;
-            padding: 6rem 2rem;
+            padding: 6rem 2rem 2rem 2rem; /* Reduced bottom padding */
             max-width: 1400px;
             margin: 0 auto;
         }
@@ -418,13 +415,18 @@
                 align-items: center;
             }
 
-            /* Hide main Gallery button, show mobile label */
+            /* Hide main Gallery button, show mobile bouncing label */
             .cta-btn[href="#gallery"] {
                 display: none;
             }
 
             .mobile-gallery-label {
                 display: block;
+            }
+
+            /* Hide sticky button on regular mobile - keep bouncing text */
+            .sticky-gallery-button {
+                display: none;
             }
         }
 
@@ -460,6 +462,15 @@
             
             nav {
                 padding: 0.6rem 1rem;
+            }
+
+            /* On short narrow screens: hide bouncing text, show bottom button */
+            .mobile-gallery-label {
+                display: none;
+            }
+
+            .sticky-gallery-button {
+                display: block;
             }
         }
 
@@ -573,7 +584,7 @@
         </section>
     </main>
 
-    <!-- Sticky Gallery Button (appears when scrolling) -->
+    <!-- Gallery Button positioned between collection and footer -->
     <div class="sticky-gallery-button">
         <a href="#gallery" class="cta-btn">Gallery</a>
     </div>
@@ -604,20 +615,14 @@
             });
         });
 
-        // Horizontal mist and sticky gallery button sync
+        // Horizontal mist and mobile label fade
         window.addEventListener('scroll', () => {
             const mist1 = document.querySelector('.mist-1');
             const mist2 = document.querySelector('.mist-2');
             if (mist1) mist1.style.transform = `translateX(${window.scrollY * 0.03}px)`;
             if (mist2) mist2.style.transform = `translateX(${window.scrollY * 0.015}px)`;
 
-            // Show sticky button when scrolled down
-            const stickyGallery = document.querySelector('.sticky-gallery-button');
-            if (stickyGallery) {
-                stickyGallery.style.opacity = window.scrollY > 200 ? '1' : '0';
-            }
-
-            // Hide mobile label when scrolled
+            // Hide mobile bouncing label when scrolled
             const label = document.querySelector('.mobile-gallery-label');
             if (label) {
                 label.style.opacity = (window.scrollY > 50) ? '0' : '1';
