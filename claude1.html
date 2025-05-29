@@ -346,7 +346,6 @@
             color: #deb887;
         }
 
-        /* Responsive Design */
        @media (max-width: 768px) {
             .hero-title {
                 font-size: 3.5rem;
@@ -358,7 +357,7 @@
             
             .hero-description {
                 font-size: 1rem;
-        margin-bottom: 1.5rem;
+                margin-bottom: 1.5rem;
             }
             
             .hero-background {
@@ -368,8 +367,8 @@
             /* Hide Ishtar on mobile, give Inanna reclined diagonal cut */
             .hero-image.left {
                 clip-path: ellipse(543px 654px at 12% 23%);
-                object-position: left center; /* Add this line */
-                    transform: translateX(-15px); /* Add this line, adjust value as needed */
+                object-position: left center;
+                transform: translateX(-15px);
             }
             
             .hero-image.right {
@@ -385,52 +384,23 @@
                 align-items: center;
             }
             
+            /* Hide Gallery button on mobile */
             .cta-btn {
-                width: 200px;
-              padding: 1rem 2rem;
-                 transform: translateY(-15px); /* Add this line, adjust value as needed */
-            }
-        
-        }
-
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 2.8rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
-            
-            .hero-description {
-                font-size: 0.95rem;
-                padding: 0 1rem;
-                margin-bottom: 1rem;
-            }
-            
-            /* Keep Inanna with reclined diagonal on small screens */
-            .hero-image.left {
-                clip-path: ellipse(432px 543px at 12% 23%);
-              transform: translateX(-20px); /* Add this line, adjust value as needed */
-            }
-            
-            .hero-image.right {
                 display: none;
             }
             
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.95rem;
+            /* Make scroll indicator bigger and more prominent on mobile */
+            .scroll-indicator {
+                font-size: 1.2rem;
+                font-weight: bold;
+                padding: 1rem;
+                background: rgba(139, 69, 19, 0.8);
+                border-radius: 25px;
+                backdrop-filter: blur(10px);
+                border: 2px solid #deb887;
+                box-shadow: 0 4px 15px rgba(222, 184, 135, 0.3);
             }
-            
-            .nav {
-                padding: 0.8rem 1rem;
-            }
-          .cta-btn {
-                width: 180px;
-              padding: 1rem 2rem;
-                transform: translateY(-15px); /* Add this line, adjust value as needed */
-            }
+        
         }
     </style>
 </head>
