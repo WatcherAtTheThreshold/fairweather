@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fairweather Studios</title>
+    <title>Fairweather Studios - Where Art & Love Converge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;700&family=Raleway:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* Base styles from claude.html, adapted and enhanced */
         * {
             margin: 0;
             padding: 0;
@@ -12,14 +16,14 @@
         }
 
         body {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            background: #0a0a0a;
+            font-family: 'Raleway', sans-serif; /* Using Raleway for body for readability */
+            background: #0a0a0a; /* Dark background from claude.html */
             color: #e8e8e8;
             overflow-x: hidden;
             line-height: 1.6;
         }
 
-        /* Mist overlay backgrounds */
+        /* Mist overlay backgrounds from claude.html */
         .mist-layer {
             position: fixed;
             top: 0;
@@ -28,10 +32,10 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.4;
+            opacity: 0.15;
             background-size: cover;
             background-position: center;
-            animation: mistFloat 25s ease-in-out infinite;
+            animation: mistFloat 20s ease-in-out infinite;
         }
 
         .mist-1 {
@@ -41,297 +45,503 @@
 
         .mist-2 {
             background-image: url('images/mist2.webp');
-            animation-delay: -12s;
-            opacity: 0.3;
+            animation-delay: -10s;
+            opacity: 0.1;
         }
 
         @keyframes mistFloat {
             0%, 100% { transform: translateX(0px) translateY(0px) scale(1); }
-            25% { transform: translateX(-15px) translateY(-8px) scale(1.01); }
-            50% { transform: translateX(12px) translateY(-15px) scale(0.99); }
-            75% { transform: translateX(-8px) translateY(8px) scale(1.005); }
+            25% { transform: translateX(-20px) translateY(-10px) scale(1.02); }
+            50% { transform: translateX(15px) translateY(-20px) scale(0.98); }
+            75% { transform: translateX(-10px) translateY(10px) scale(1.01); }
         }
 
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 100;
-            background: rgba(0, 0, 0, 0.85);
+        /* Header styles from claude.html, adapted */
+        header {
+            position: relative;
+            z-index: 10;
+            padding: 2rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(139, 69, 19, 0.2);
-            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(139, 69, 19, 0.3);
         }
 
         .nav-links {
             display: flex;
             justify-content: center;
-            gap: 2.5rem;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
             flex-wrap: wrap;
         }
 
         .nav-links a {
-            color: #deb887;
+            color: #deb887; /* Gold accent color */
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
             padding: 0.5rem 1rem;
-            border-radius: 20px;
             border: 1px solid transparent;
+            border-radius: 20px;
+            position: relative;
         }
 
         .nav-links a:hover {
             color: #f4e4bc;
             border-color: #deb887;
             background: rgba(222, 184, 135, 0.1);
+            transform: translateY(-2px);
         }
 
-        /* Hero Section */
-        .hero {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            z-index: 5;
-        }
-
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            z-index: 2;
-        }
-
-        .hero-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: all 0.5s ease;
-        }
-
-        .hero-image.left {
-            clip-path: polygon(0 0, 60% 0, 45% 100%, 0 100%);
-        }
-
-        .hero-image.right {
-            clip-path: polygon(55% 0, 100% 0, 100% 100%, 40% 100%);
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                135deg, 
-                rgba(0, 0, 0, 0.7) 0%, 
-                rgba(0, 0, 0, 0.3) 40%, 
-                rgba(0, 0, 0, 0.3) 60%, 
-                rgba(0, 0, 0, 0.7) 100%
-            );
-            z-index: 3;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            max-width: 800px;
-            padding: 2rem;
-        }
-
-        .hero-title {
-            font-size: 5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #deb887, #f4e4bc, #cd853f);
+        .main-title {
+            font-family: 'Cormorant Garamond', serif; /* Cormorant Garamond for titles */
+            font-size: 4rem;
+            margin: 1rem 0;
+            background: linear-gradient(45deg, #deb887, #f4e4bc, #cd853f); /* Gold gradient */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             font-weight: 300;
-            letter-spacing: 4px;
-            animation: titleGlow 3s ease-in-out infinite alternate;
+            letter-spacing: 3px;
         }
 
-        @keyframes titleGlow {
-            0% { filter: drop-shadow(0 0 5px rgba(222, 184, 135, 0.3)); }
-            100% { filter: drop-shadow(0 0 15px rgba(222, 184, 135, 0.6)); }
-        }
-
-        .hero-subtitle {
-            font-size: 1.8rem;
-            color: #f4e4bc;
+        .subtitle {
+            font-size: 1.4rem;
+            color: #c9c9c9;
             font-style: italic;
             margin-bottom: 2rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .hero-description {
-            font-size: 1.2rem;
+        /* Hero Section - More pronounced and artistic blend */
+        .hero-section {
+            position: relative;
+            z-index: 5;
+            padding: 6rem 2rem; /* Increased padding for prominence */
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+            min-height: 600px; /* Ensure significant height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: url('images/mist-blue.png') no-repeat center center/cover; /* Use mist-blue for a base */
+            overflow: hidden; /* For inner elements to move */
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)); /* Darker overlay for text contrast */
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.8rem;
+            color: #f4e4bc;
+            margin-bottom: 1.5rem;
+            z-index: 2;
+            position: relative;
+            text-shadow: 0 0 15px rgba(244, 228, 188, 0.5);
+        }
+
+        .hero-tagline {
+            font-size: 1.6rem;
             color: #c9c9c9;
-            margin-bottom: 3rem;
-            line-height: 1.8;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+            z-index: 2;
+            position: relative;
         }
 
-        .hero-cta {
+        .hero-image-blend {
+            position: relative;
+            width: 100%;
+            max-width: 900px; /* Adjust as needed */
+            height: 400px; /* Fixed height for visual consistency */
+            margin-top: 40px;
+            z-index: 2;
+            display: flex; /* Arrange images side by side */
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .hero-image-blend img {
+            position: absolute;
+            width: 60%; /* Adjust width to allow for fade area */
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            filter: grayscale(20%) saturate(1.2) contrast(1.1); /* Subtle artistic filter */
+        }
+
+        .hero-image-blend .left-image {
+            left: 0;
+            transform: translateX(0%) scale(1.05); /* Slight zoom */
+            z-index: 2;
+        }
+
+        .hero-image-blend .right-image {
+            right: 0;
+            transform: translateX(0%) scale(1.05); /* Slight zoom */
+            z-index: 1;
+        }
+
+        .hero-image-blend::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 30%; /* Adjust width of the left fade */
+            height: 100%;
+            background: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%); /* Fade to black on the right */
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .hero-image-blend::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30%; /* Adjust width of the right fade */
+            height: 100%;
+            background: linear-gradient(to left, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%); /* Fade to black on the left */
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .hero-image-blend .middle-overlay {
+            position: absolute;
+            width: 40%; /* Adjust width of the clear middle area */
+            height: 100%;
+            left: 30%; /* Center it */
+            background: rgba(0, 0, 0, 0.2) url('images/mist-overlay.png') center center/cover; /* Subtle mist */
+            backdrop-filter: blur(5px);
+            z-index: 4; /* On top of fades */
+            pointer-events: none;
+        }
+
+        /* Sections and general styling */
+        .container {
+            max-width: 1100px; /* Slightly wider container for art */
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            position: relative;
+            z-index: 5;
+            padding: 6rem 0;
+            margin-bottom: 4rem;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(139, 69, 19, 0.2);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/matt-white.png'); /* Using matt-white for subtle texture */
+            background-size: cover;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            text-align: center;
+            font-size: 3.2em;
+            color: #deb887;
+            margin-bottom: 40px;
+            font-weight: 400;
+            text-shadow: 0 0 10px rgba(222, 184, 135, 0.3);
+        }
+
+        .section p {
+            color: #c0c0c0;
+            font-size: 1.1em;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            text-align: center;
+        }
+
+        /* Featured Gallery from claude.html */
+        .featured-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem; /* Increased gap */
+            margin: 3rem 0;
+            padding: 0 20px;
+        }
+
+        .artwork-card {
+            background: rgba(0, 0, 0, 0.6); /* Darker background for cards */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 69, 19, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .artwork-card:hover {
+            transform: translateY(-10px) scale(1.03); /* More pronounced hover */
+            border-color: rgba(222, 184, 135, 0.6);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+        }
+
+        .artwork-image {
+            width: 100%;
+            height: 280px; /* Slightly taller images */
+            object-fit: cover;
+            transition: transform 0.4s ease;
+            filter: brightness(0.9) contrast(1.1); /* Subtle image enhancement */
+        }
+
+        .artwork-card:hover .artwork-image {
+            transform: scale(1.1);
+        }
+
+        .artwork-info {
+            padding: 1.8rem; /* Increased padding */
+            text-align: center;
+        }
+
+        .artwork-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem; /* Larger title */
+            color: #deb887;
+            margin-bottom: 0.6rem;
+            font-weight: 400;
+        }
+
+        .artwork-artist {
+            color: #a0a0a0;
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-size: 1em;
+        }
+
+        .artwork-description {
+            color: #c0c0c0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Artist Showcase from claude.html */
+        .artist-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin: 6rem 0;
+            align-items: start;
+            padding: 0 20px;
+        }
+
+        .artist-section {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(139, 69, 19, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .artist-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('images/mist-overlay.png');
+            background-size: cover;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        .artist-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: #deb887;
+            margin-bottom: 0.8rem;
+            position: relative;
+            z-index: 2;
+            font-weight: 400;
+        }
+
+        .artist-style {
+            font-size: 1.2rem;
+            color: #b8b8b8;
+            margin-bottom: 1.8rem;
+            font-style: italic;
+            position: relative;
+            z-index: 2;
+        }
+
+        .artist-description {
+            color: #c0c0c0;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .artist-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .artist-thumb {
+            width: 100%;
+            height: 150px; /* Slightly larger thumbnails */
+            object-fit: cover;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(139, 69, 19, 0.3);
+        }
+
+        .artist-thumb:hover {
+            transform: scale(1.08);
+            border-color: rgba(222, 184, 135, 0.6);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        }
+
+        /* CTA Section from claude.html */
+        .cta-section {
+            text-align: center;
+            margin: 6rem auto; /* Center the section */
+            padding: 4rem 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 25px;
+            border: 1px solid rgba(139, 69, 19, 0.2);
+            position: relative;
+            overflow: hidden;
+            max-width: 1000px; /* Limit width */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('images/mist-tile.png');
+            background-size: cover;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .cta-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            color: #deb887;
+            margin-bottom: 1.8rem;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 0 10px rgba(222, 184, 135, 0.3);
+        }
+
+        .cta-text {
+            font-size: 1.3rem;
+            color: #c0c0c0;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
+        }
+
+        .button-group {
             display: flex;
             gap: 2rem;
             justify-content: center;
             flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
         }
 
-        .cta-btn {
+        .btn {
             padding: 1.2rem 2.5rem;
-            background: linear-gradient(45deg, #8B4513, #A0522D, #CD853F);
+            background: linear-gradient(45deg, #8B4513, #A0522D, #CD853F); /* Warm brown gradient */
             color: #f4e4bc;
             text-decoration: none;
             border-radius: 30px;
             font-weight: bold;
             transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
             font-size: 1.1rem;
-            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.3);
             text-transform: uppercase;
             letter-spacing: 1px;
-            border: none;
         }
 
-        .cta-btn:hover {
+        .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.6);
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.4);
             background: linear-gradient(45deg, #A0522D, #CD853F, #DEB887);
         }
 
-        .cta-btn.outline {
+        .btn-outline {
             background: transparent;
-            border: 2px solid #deb887;
             color: #deb887;
-            box-shadow: 0 4px 15px rgba(222, 184, 135, 0.2);
+            border: 2px solid #8B4513;
+            box-shadow: none;
         }
 
-        .cta-btn.outline:hover {
+        .btn-outline:hover {
             background: linear-gradient(45deg, #8B4513, #A0522D);
             color: #f4e4bc;
-            border-color: #f4e4bc;
         }
 
-        /* Scroll indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #deb887;
-            font-size: 0.9rem;
-            z-index: 10;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
-        }
-
-        /* Content sections */
-        .content-section {
-            position: relative;
-            z-index: 5;
-            padding: 6rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .featured-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-            margin: 4rem 0;
-        }
-
-        .artwork-card {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            color: #333;
-        }
-
-        .artwork-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .artwork-image {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .artwork-info {
-            padding: 1.5rem;
-        }
-
-        .artwork-title {
-            font-size: 1.4rem;
-            color: #8B4513;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-        }
-
-        .artwork-artist {
-            color: #666;
-            font-style: italic;
-            margin-bottom: 1rem;
-        }
-
-        .artwork-description {
-            color: #555;
-            line-height: 1.6;
-        }
-
-        .section-title {
-            font-size: 3rem;
-            text-align: center;
-            color: #deb887;
-            margin-bottom: 2rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .section-subtitle {
-            font-size: 1.3rem;
-            text-align: center;
-            color: #c0c0c0;
-            margin-bottom: 4rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            font-style: italic;
-        }
-
+        /* Footer from claude.html */
         footer {
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(15px);
-            padding: 3rem 2rem;
             text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
             border-top: 1px solid rgba(139, 69, 19, 0.3);
+            margin-top: 4rem;
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 2.5rem;
+            gap: 3rem;
             margin-bottom: 2rem;
             flex-wrap: wrap;
         }
@@ -340,83 +550,121 @@
             color: #b8b8b8;
             text-decoration: none;
             transition: color 0.3s ease;
+            font-size: 1.1rem;
         }
 
         .footer-links a:hover {
             color: #deb887;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
+        .divider {
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #8B4513, #deb887, #8B4513, transparent);
+            margin: 3rem auto;
+        }
+
+        /* Responsive Design from claude.html, adapted */
+        @media (max-width: 992px) {
             .hero-title {
-                font-size: 3.5rem;
+                font-size: 3.2rem;
             }
-            
-            .hero-subtitle {
+            .hero-tagline {
                 font-size: 1.4rem;
             }
-            
-            .hero-description {
-                font-size: 1rem;
+            .hero-image-blend {
+                height: 350px;
             }
-            
-            .hero-background {
+            .section h2 {
+                font-size: 2.8em;
+            }
+            .artist-showcase {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 3.2rem;
+            }
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            .hero-tagline {
+                font-size: 1.2rem;
+            }
+            .hero-image-blend {
+                height: 300px;
+                flex-direction: column; /* Stack images vertically on small screens */
+            }
+            .hero-image-blend img {
+                position: relative; /* Remove absolute positioning */
+                width: 100%; /* Full width */
+                clip-path: none; /* Remove clip path */
+                transform: none; /* Remove transform */
+                height: 50%; /* Each takes half height */
+            }
+            .hero-image-blend .left-image, .hero-image-blend .right-image {
+                left: auto;
+                right: auto;
+            }
+            .hero-image-blend::after {
+                background: linear-gradient(to bottom, rgba(0,0,0,0.3), transparent, rgba(0,0,0,0.3));
+            }
+            .hero-image-blend .middle-overlay {
+                width: 100%;
+                height: 50px; /* Horizontal blend area */
+                top: 50%;
+                transform: translateY(-50%);
+                border-left: none;
+                border-right: none;
+                border-top: 2px solid rgba(222, 184, 135, 0.5);
+                border-bottom: 2px solid rgba(222, 184, 135, 0.5);
+            }
+
+            .featured-gallery {
                 grid-template-columns: 1fr;
             }
-            
-            /* Hide Ishtar on mobile, give Inanna reclined diagonal cut */
-            .hero-image.left {
-                clip-path: polygon(0 0, 100% 0, 50% 100%, 0 100%);
-            }
-            
-            .hero-image.right {
-                display: none;
-            }
-            
             .nav-links {
-                gap: 1.5rem;
+                gap: 1rem;
             }
-            
-            .hero-cta {
+            .button-group {
                 flex-direction: column;
                 align-items: center;
             }
-            
-            .cta-btn {
+            .btn {
                 width: 250px;
+            }
+            .cta-title {
+                font-size: 2.5rem;
+            }
+            .section {
+                padding: 4rem 0;
             }
         }
 
         @media (max-width: 480px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
             .hero-title {
-                font-size: 2.8rem;
+                font-size: 2.2rem;
             }
-            
-            .hero-subtitle {
-                font-size: 1.2rem;
+            .hero-tagline {
+                font-size: 1rem;
             }
-            
-            .hero-description {
-                font-size: 0.95rem;
-                padding: 0 1rem;
+            .artwork-title {
+                font-size: 1.4rem;
             }
-            
-            /* Keep Inanna with reclined diagonal on small screens */
-            .hero-image.left {
-                clip-path: polygon(0 0, 100% 0, 45% 100%, 0 100%);
+            .artist-name {
+                font-size: 2rem;
             }
-            
-            .hero-image.right {
-                display: none;
+            .artist-gallery {
+                grid-template-columns: 1fr;
             }
-            
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.95rem;
-            }
-            
-            nav {
-                padding: 0.8rem 1rem;
+            .cta-title {
+                font-size: 2rem;
             }
         }
     </style>
@@ -424,113 +672,163 @@
 <body>
     <div class="mist-layer mist-1"></div>
     <div class="mist-layer mist-2"></div>
-    
-            <nav>
-        <div class="nav-links">
+
+    <header>
+        <nav class="nav-links">
             <a href="#home">Home</a>
             <a href="#gallery">Gallery</a>
-            <a href="#about">About</a>
+            <a href="#artists">Artists</a>
             <a href="#contact">Contact</a>
-        </div>
-    </nav>
-    
-    <section class="hero">
-        <div class="hero-background">
-            <img src="images/under-the-aegis-of-inanna.webp" alt="Under the Aegis of Inanna" class="hero-image left">
-            <img src="images/under-the-aegis-of-ishtarr.webp" alt="Under the Aegis of Ishtar" class="hero-image right">
-        </div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1 class="hero-title">Fairweather</h1>
-            <p class="hero-subtitle">Under the Aegis of Creation</p>
-            <p class="hero-description">
-                Where atmospheric impressions meet mystical visions, and two souls create as one. 
-                Guided by ancient wisdom and modern love, we paint the sacred into being.
-            </p>
-            <div class="hero-cta">
-                <a href="#gallery" class="cta-btn">Explore Gallery</a>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            ↓ Discover Our Art ↓
-        </div>
-    </section>
+        </nav>
+        <h1 class="main-title">Fairweather Studios</h1>
+        <p class="subtitle">Where atmospheric impressions dance with mystical visions</p>
+    </header>
 
-    <main class="content-section">
-        <h2 class="section-title">Featured Works</h2>
-        <p class="section-subtitle">A glimpse into our world of paint, passion, and divine inspiration</p>
-        
-        <section class="featured-gallery">
-            <div class="artwork-card">
-                <img src="images/BlueLandscape.png" alt="Blue Landscape" class="artwork-image">
-                <div class="artwork-info">
-                    <h3 class="artwork-title">Blue Landscape</h3>
-                    <p class="artwork-artist">Oil on Panel by Jessop Hunt</p>
-                    <p class="artwork-description">Where twilight meets earth in shades of cobalt and cerulean, capturing that liminal moment when day surrenders to night.</p>
+    <main>
+        <section id="home" class="hero-section">
+            <h2 class="hero-title">A Union of Brushstroke and Spirit</h2>
+            <p class="hero-tagline">Fairweather Studios is where our individual artistic journeys converge, weaving together diverse perspectives to create captivating fine art that speaks to the soul.</p>
+            <div class="hero-image-blend">
+                <img src="images/under-the-aegis-of-ishtarr.webp" alt="Under the Aegis of Ishtar - Shannon's Art" class="left-image">
+                <img src="images/BlueLandscape.png" alt="Blue Landscape - Jessop's Art" class="right-image">
+                <div class="middle-overlay"></div>
+            </div>
+            <a href="#gallery" class="btn" style="margin-top: 60px; z-index: 2; position: relative;">Explore Our Vision</a>
+        </section>
+
+        <section id="artists" class="section">
+            <div class="container">
+                <h2>Meet The Artists</h2>
+                <div class="artist-showcase">
+                    <div class="artist-section">
+                        <h2 class="artist-name">Jessop Hunt</h2>
+                        <p class="artist-style">Oil Paintings • Impressionistic & Atmospheric</p>
+                        <p class="artist-description">
+                            Through oil and canvas, I capture the fleeting moments where light becomes poetry.
+                            Each landscape is a meditation on atmosphere—the way morning mist clings to meadows,
+                            how golden hour transforms the ordinary into the sublime. My brushstrokes follow the
+                            rhythm of light itself, creating impressions that live in the space between memory and dream.
+                        </p>
+                        <div class="artist-gallery">
+                            <img src="images/Birch.png" alt="Birch Trees" class="artist-thumb">
+                            <img src="images/SunriseDoctrine.png" alt="Sunrise Doctrine" class="artist-thumb">
+                            <img src="images/WoodsView.png" alt="Woods View" class="artist-thumb">
+                            <img src="images/WorkingThrough.png" alt="Working Through" class="artist-thumb">
+                        </div>
+                        <p style="margin-top: 30px;"><a href="https://watcheratthethreshold.github.io/sketchy-ponderings/" class="btn btn-outline" target="_blank">Visit Sketchy Ponderings &rarr;</a></p>
+                    </div>
+
+                    <div class="artist-section">
+                        <h2 class="artist-name">Shannon Hunt</h2>
+                        <p class="artist-style">Acrylic Paintings • Mystical, Illustrative & Realistic</p>
+                        <p class="artist-description">
+                            My work exists in the liminal spaces where the sacred feminine emerges from pigment and dream.
+                            Each face I paint carries ancient wisdom—goddesses who remember when the world was young,
+                            spirits who guard the thresholds between worlds. Through acrylic and intention, I give form
+                            to the invisible forces that guide and protect us.
+                        </p>
+                        <div class="artist-gallery">
+                            <img src="images/under-the-aegis-of-inanna.webp" alt="Under the Aegis of Inanna" class="artist-thumb">
+                            <img src="images/RowanPortrait.png" alt="Rowan Portrait" class="artist-thumb">
+                            <img src="images/JessopPortrait.png" alt="Jessop Portrait" class="artist-thumb">
+                            <img src="images/SaraQuinn.png" alt="Sara Quinn" class="artist-thumb">
+                        </div>
+                        <p style="margin-top: 30px;"><a href="https://watcheratthethreshold.github.io/the-second-gaze/" class="btn btn-outline" target="_blank">Discover The Second Gaze &rarr;</a></p>
+                    </div>
                 </div>
             </div>
-            
-            <div class="artwork-card">
-                <img src="images/MinervasWisdom.webp" alt="Minerva's Wisdom" class="artwork-image">
-                <div class="artwork-info">
-                    <h3 class="artwork-title">Minerva's Wisdom</h3>
-                    <p class="artwork-artist">Acrylic & Ink by Shannon Hunt</p>
-                    <p class="artwork-description">The goddess of wisdom emerges from layers of sacred geometry and ancient knowing, her eyes holding secrets of the ages.</p>
+        </section>
+
+        <section id="gallery" class="section">
+            <div class="container">
+                <h2>Our Shared Canvas</h2>
+                <p>A curated selection showcasing the distinct yet complementary styles of Fairweather Studios. Dive deeper into our individual portfolios through the links in the "Meet The Artists" section.</p>
+                <div class="featured-gallery">
+                    <div class="artwork-card">
+                        <img src="images/BlueLandscape.png" alt="Blue Landscape" class="artwork-image">
+                        <div class="artwork-info">
+                            <h3 class="artwork-title">Blue Landscape</h3>
+                            <p class="artwork-artist">Jessop Hunt</p>
+                            <p class="artwork-description">An oil on panel capturing a serene, atmospheric landscape under a soft, blue light.</p>
+                        </div>
+                    </div>
+                    <div class="artwork-card">
+                        <img src="images/MinervasWisdom.webp" alt="Minerva's Wisdom" class="artwork-image">
+                        <div class="artwork-info">
+                            <h3 class="artwork-title">Minerva’s Wisdom</h3>
+                            <p class="artwork-artist">Shannon Hunt</p>
+                            <p class="artwork-description">A mixed-media piece blending acrylic and ink to depict a figure embodying ancient knowledge and strength.</p>
+                        </div>
+                    </div>
+                     <div class="artwork-card">
+                        <img src="images/YellowLandscape.png" alt="Yellow Landscape" class="artwork-image">
+                        <div class="artwork-info">
+                            <h3 class="artwork-title">Golden Fields</h3>
+                            <p class="artwork-artist">Jessop Hunt</p>
+                            <p class="artwork-description">Where earth meets sky in a symphony of amber light, capturing that perfect moment when day begins its gentle surrender.</p>
+                        </div>
+                    </div>
+                    <div class="artwork-card">
+                        <img src="images/PotniaTheron.webp" alt="Potnia Theron" class="artwork-image">
+                        <div class="artwork-info">
+                            <h3 class="artwork-title">Potnia Theron</h3>
+                            <p class="artwork-artist">Shannon Hunt</p>
+                            <p class="artwork-description">The ancient goddess who commands all wild creatures, painted in layers of sacred blue and gold.</p>
+                        </div>
+                    </div>
+                    <div class="artwork-card">
+                        <img src="images/SummerStroll.png" alt="Summer Stroll" class="artwork-image">
+                        <div class="artwork-info">
+                            <h3 class="artwork-title">Summer Stroll</h3>
+                            <p class="artwork-artist">Jessop Hunt</p>
+                            <p class="artwork-description">A gentle walk through dappled sunlight, where every brushstroke carries the warmth of a perfect summer afternoon.</p>
+                        </div>
+                    </div>
+                    <div class="artwork-card">
+                        <img src="images/Flowers.png" alt="Flowers" class="artwork-image">
+                        <div class="artwork-info">
+                            <h3 class="artwork-title">Flower Study</h3>
+                            <p class="artwork-artist">Shannon Hunt</p>
+                            <p class="artwork-description">Blossoms that seem to hold their own inner light, painted with the reverence of one who sees magic in nature's smallest gifts.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="artwork-card">
-                <img src="images/YellowLandscape.png" alt="Golden Fields" class="artwork-image">
-                <div class="artwork-info">
-                    <h3 class="artwork-title">Golden Fields</h3>
-                    <p class="artwork-artist">Impressionistic Study</p>
-                    <p class="artwork-description">Amber waves of grain and light, where earth meets heaven in a symphony of warmth and endless possibility.</p>
-                </div>
-            </div>
-            
-            <div class="artwork-card">
-                <img src="images/SaraQuinn.png" alt="Sara Quinn Portrait" class="artwork-image">
-                <div class="artwork-info">
-                    <h3 class="artwork-title">Sara Quinn</h3>
-                    <p class="artwork-artist">Portrait by Shannon Hunt</p>
-                    <p class="artwork-description">A soul captured in pigment and light, where every brushstroke reveals the luminous spirit within.</p>
-                </div>
-            </div>
-            
-            <div class="artwork-card">
-                <img src="images/SummerStroll.png" alt="Summer Stroll" class="artwork-image">
-                <div class="artwork-info">
-                    <h3 class="artwork-title">Summer Stroll</h3>
-                    <p class="artwork-artist">Impressionistic Scene</p>
-                    <p class="artwork-description">Dappled sunlight through ancient trees, capturing the gentle rhythm of a perfect summer afternoon.</p>
-                </div>
-            </div>
-            
-            <div class="artwork-card">
-                <img src="images/Flowers.png" alt="Flower Study" class="artwork-image">
-                <div class="artwork-info">
-                    <h3 class="artwork-title">Botanical Dreams</h3>
-                    <p class="artwork-artist">Shannon's Garden Magic</p>
-                    <p class="artwork-description">Blossoms that hold their own inner radiance, painted with the reverence of one who sees divinity in nature's smallest gifts.</p>
-                </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="contact" class="cta-section">
+            <h2 class="cta-title">Two Souls, One Vision</h2>
+            <p class="cta-text">
+                Born from love and nurtured by shared devotion to the sacred act of creation, Fairweather Studios
+                is where our individual voices harmonize into something greater than the sum of its parts. Here,
+                atmospheric impressions dance with mystical visions, oil paintings converse with acrylic dreams,
+                and every piece tells a story of partnership, passion, and the magic that happens when two artists
+                choose to create their life together.
+            </p>
+
+            <div class="button-group">
+                <a href="mailto:info@fairweatherproductions.com" class="btn">Email Us</a>
+                <a href="#commission" class="btn btn-outline">Commission Art</a>
+                <a href="#story" class="btn btn-outline">Our Journey</a>
             </div>
         </section>
     </main>
 
     <footer>
         <div class="footer-links">
-            <a href="https://watcheratthethreshold.github.io/sketchy-ponderings/">Sketchy Ponderings</a>
-            <a href="https://watcheratthethreshold.github.io/the-second-gaze/">The Second Gaze</a>
-            <a href="#newsletter">Newsletter</a>
-            <a href="#commission">Commissions</a>
+            <a href="https://watcheratthethreshold.github.io/sketchy-ponderings/" target="_blank">Sketchy Ponderings</a>
+            <a href="https://watcheratthethreshold.github.io/the-second-gaze/" target="_blank">The Second Gaze</a>
         </div>
-        <p style="color: #888; margin-top: 1rem;">
-            © 2025 Fairweather Studios • Jessop & Shannon Hunt • Where Art & Love Converge
+        <div class="divider"></div>
+        <p style="color: #888; font-size: 1rem;">
+            © 2025 Fairweather Studios • Where Art & Love Converge
         </p>
     </footer>
 
     <script>
-        // Smooth scrolling for navigation
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -543,51 +841,21 @@
             });
         });
 
-        // Minimal parallax - keep hero images static, gentle mist only
-        let lastScrollY = 0;
-        let ticking = false;
-        
-        function smoothParallax() {
+        // Add subtle parallax effect to mist layers
+        window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const mist1 = document.querySelector('.mist-1');
             const mist2 = document.querySelector('.mist-2');
-            
-            // Only update if scroll position actually changed
-            if (lastScrollY !== scrolled) {
-                // Only move the mist layers gently
-                if (mist1) {
-                    mist1.style.transform = `translate3d(0, ${scrolled * 0.03}px, 0)`;
-                }
-                if (mist2) {
-                    mist2.style.transform = `translate3d(0, ${scrolled * 0.02}px, 0)`;
-                }
-                
-                // Hero images stay completely static - no movement at all
-                // This preserves the powerful gaze and eliminates jumpiness
-                
-                lastScrollY = scrolled;
-            }
-            
-            ticking = false;
-        }
-        
-        function requestTick() {
-            if (!ticking) {
-                requestAnimationFrame(smoothParallax);
-                ticking = true;
-            }
-        }
-        
-        window.addEventListener('scroll', requestTick, { passive: true });
 
-        // Hide scroll indicator after scrolling
-        window.addEventListener('scroll', () => {
-            const indicator = document.querySelector('.scroll-indicator');
-            if (window.scrollY > 100) {
-                indicator.style.opacity = '0';
-            } else {
-                indicator.style.opacity = '1';
-            }
+            if (mist1) mist1.style.transform = `translateY(${scrolled * 0.2}px)`;
+            if (mist2) mist2.style.transform = `translateY(${scrolled * 0.1}px)`;
+        });
+
+        // Add gentle hover animations to artwork cards
+        document.querySelectorAll('.artwork-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+            });
         });
     </script>
 </body>
