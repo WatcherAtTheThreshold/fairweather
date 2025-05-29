@@ -298,6 +298,16 @@
         }
 
         
+
+footer {
+    margin-bottom: 5rem;
+}
+
+footer {
+    margin-bottom: 5rem;
+}
+
+
 footer {
     margin-bottom: 5rem;
 }
@@ -601,7 +611,7 @@ footer {
 
     <script>
         // Smooth scrolling for navigation
-        // Cloud-like horizontal scroll for mist & synced gallery buttons
+        // Horizontal mist and sticky gallery button sync
         window.addEventListener('scroll', () => {
             const mist1 = document.querySelector('.mist-1');
             const mist2 = document.querySelector('.mist-2');
@@ -610,12 +620,9 @@ footer {
 
             const topGallery = document.querySelector('.hero-cta .cta-btn[href="#gallery"]');
             const stickyGallery = document.querySelector('.sticky-gallery-button');
-            if (topGallery && stickyGallery) {
-                const showTop = window.scrollY <= 50;
-                topGallery.style.opacity = showTop ? '1' : '0';
-                stickyGallery.style.opacity = showTop ? '0' : '1';
-                topGallery.style.transition = 'opacity 0.4s ease';
-                stickyGallery.style.transition = 'opacity 0.4s ease';
+            if (stickyGallery) {
+                const shouldShowSticky = !topGallery || window.scrollY > 50;
+                stickyGallery.style.opacity = shouldShowSticky ? '1' : '0';
             }
 
             const label = document.querySelector('.mobile-gallery-label');
@@ -627,6 +634,8 @@ footer {
             const indicator = document.querySelector('.scroll-indicator');
             if (indicator) {
                 indicator.style.opacity = (window.scrollY > 100) ? '0' : '1';
+            }
+        });
             }
         });
 
