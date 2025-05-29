@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | Fairweather</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    body {
+      font-family: serif;
+      background-color: #f9f6f1;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 60px 20px 30px;
+      background: url('images/mist-veil.webp') center/cover no-repeat;
+      color: #fff;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5em;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .bio-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 60px 20px;
+      gap: 40px;
+    }
+
+    .bio {
+      flex: 1 1 300px;
+      max-width: 400px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .bio img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+
+    .bio h2 {
+      margin-bottom: 0.5em;
+    }
+
+    .bio p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .bio a {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #222;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+
+    .bio a:hover {
+      background: #555;
+    }
+
+    .interactive {
+      background: #f0ece6;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .interactive h2 {
+      margin-bottom: 1em;
+    }
+
+    .interactive a {
+      margin: 10px;
+      display: inline-block;
+      padding: 10px 18px;
+      background: #444;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+
+    .interactive a:hover {
+      background: #666;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .bio-section {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <h1>About Fairweather</h1>
+    <p>A shared hearth where two artists explore wonder, mysticism, and meaning—through brush, word, and lens.</p>
+  </section>
+
+  <section class="bio-section">
+    <div class="bio">
+      <img src="images/shannon-portrait.jpg" alt="Shannon Hunt Portrait">
+      <h2>Shannon Hunt</h2>
+      <p>
+        Visionary painter of the inner world. Her work evokes myth, gaze, and the sacred feminine. The Second Gaze is her sanctuary of symbolic sight.
+      </p>
+      <a href="https://watcheratthethreshold.github.io/the-second-gaze/" target="_blank">Enter The Second Gaze</a>
+    </div>
+
+    <div class="bio">
+      <img src="images/jessop-portrait.jpg" alt="Jessop Hunt Portrait">
+      <h2>Jessop Hunt</h2>
+      <p>
+        Seeker of stories, dreamer in pixels and paint. Sketchy Ponderings is where logic and spirit meet in quiet reflection and playful inquiry.
+      </p>
+      <a href="https://watcheratthethreshold.github.io/sketchy-ponderings/" target="_blank">Enter Sketchy Ponderings</a>
+    </div>
+  </section>
+
+  <section class="interactive">
+    <h2>Interactive Offerings</h2>
+    <a href="https://watcheratthethreshold.github.io/the-second-gaze/tarot.html" target="_blank">Pull a Tarot Card</a>
+    <a href="https://watcheratthethreshold.github.io/sketchy-ponderings/sigil-oracle.html" target="_blank">Consult the Sigil Oracle</a>
+  </section>
+
+</body>
+</html>
