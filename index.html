@@ -484,15 +484,26 @@
 
 
 
+
 @media (max-height: 500px) and (max-width: 1024px) {
     .hero-content {
-        transform: translateY(-105px); /* move everything slightly more up */
+        transform: translateY(-110px);
     }
 
     .hero-subtitle {
-        margin-top: 4.5rem;
+        margin-top: 6rem;
         margin-bottom: 4.2rem;
     }
+
+    .hero-description {
+        margin-bottom: 2.5rem;
+    }
+
+    .cta-btn {
+        margin-top: -2.6rem;
+    }
+}
+
 
     .cta-btn {
         margin-top: -2.3rem;
@@ -513,6 +524,15 @@
 
 }
 
+
+.sticky-gallery-button {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+    text-align: center;
+}
 </style>
 </head>
 <body>
@@ -551,7 +571,7 @@
 </section>
 
     <main class="content-section">
-        <h2 class="section-title">Selected Collection</h2>
+        <h2 class="section-title">Select Collection</h2>
         <p class="section-subtitle">A glimpse into our world of paint, passion, and divine inspiration</p>
         
         <section class="featured-gallery">
@@ -609,9 +629,7 @@
                 </div>
             </div>
         </section>
-<div style="text-align: center; margin-top: 2rem;">
-    <a href="#gallery" class="cta-btn">Gallery</a>
-</div>
+<div class="sticky-gallery-button"><a href="#gallery" class="cta-btn">Gallery</a></div>
 
     </main>
 
