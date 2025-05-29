@@ -471,6 +471,21 @@
         display: none;
     }
 }
+@media (max-width: 650px) {
+  .nav-links a[href="#gallery"] {
+    display: none;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media (max-height: 500px) and (max-width: 1024px) {
+  .hero-content {
+    transform: translateY(-50px);
+  }
+}
 </style>
 </head>
 <body>
@@ -582,6 +597,13 @@
     </footer>
 
     <script>
+window.addEventListener('scroll', () => {
+    const galleryBtn = document.querySelector('.cta-btn[href="#gallery"]');
+    if (galleryBtn) {
+        galleryBtn.style.opacity = (window.scrollY > 50) ? '0' : '1';
+        galleryBtn.style.transition = 'opacity 0.4s ease';
+    }
+});
         // Smooth scrolling for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
