@@ -235,23 +235,24 @@
             transform: translateX(-50%);
             color: #deb887;
             font-size: 1.2rem;
-            animation: gentleBob 4s ease-in-out infinite;
+            animation: gentleBreath 8s ease-in-out infinite;
             z-index: 10;
             text-shadow: 0 0 8px rgba(0,0,0,0.5);
         }
 
-        @keyframes gentleBob {
-            0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
-            40% { transform: translate(-50%, -6px); }
-            60% { transform: translate(-50%, -3px); }
+        @keyframes gentleBreath {
+            0%, 100% { transform: translate(-50%, 0); opacity: 0.8; }
+            50% { transform: translate(-50%, -4px); opacity: 1; }
         }
 
         /* Sticky Gallery Button - positioned between collection and footer */
         .sticky-gallery-button {
-            position: relative;
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 200;
             text-align: center;
-            padding: 3rem 0;
-            z-index: 10;
             display: none; /* Hidden by default */
         }
 
@@ -415,7 +416,7 @@
                 align-items: center;
             }
 
-            /* Hide main Gallery button, show mobile bouncing label */
+            /* Hide main Gallery button, show mobile bouncing label AND bottom button */
             .cta-btn[href="#gallery"] {
                 display: none;
             }
@@ -424,9 +425,9 @@
                 display: block;
             }
 
-            /* Hide sticky button on regular mobile - keep bouncing text */
+            /* Show sticky button at bottom on tablet/mobile */
             .sticky-gallery-button {
-                display: none;
+                display: block;
             }
         }
 
@@ -523,6 +524,11 @@
         <div class="mobile-gallery-label">↓ Gallery ↓</div>
     </section>
 
+    <!-- Fixed Gallery Button (appears above footer on mobile) -->
+    <div class="sticky-gallery-button">
+        <a href="#gallery" class="cta-btn">Gallery</a>
+    </div>
+
     <main class="content-section" id="gallery">
         <h2 class="section-title">Select Collection</h2>
         <p class="section-subtitle">A glimpse into our world of paint, passion, and divine inspiration</p>
@@ -583,11 +589,6 @@
             </div>
         </section>
     </main>
-
-    <!-- Gallery Button positioned between collection and footer -->
-    <div class="sticky-gallery-button">
-        <a href="#gallery" class="cta-btn">Gallery</a>
-    </div>
 
     <footer>
         <div class="footer-links">
