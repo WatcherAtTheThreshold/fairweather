@@ -488,6 +488,34 @@
                 display: none;
             }
         }
+#backToTopBtn {
+  position: fixed;
+  bottom: 40px;
+  right: 30px;
+  z-index: 999;
+  background: linear-gradient(45deg, #8B4513, #A0522D, #CD853F);
+  color: #f4e4bc;
+  border: none;
+  border-radius: 50px;
+  padding: 0.7rem 1.2rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+  transition: opacity 0.3s ease, transform 0.2s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#backToTopBtn.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#backToTopBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(139, 69, 19, 0.5);
+}
+
     </style>
 </head>
 <body>
@@ -605,6 +633,19 @@
     </footer>
 
     <script>
+  const backToTopBtn = document.getElementById("backToTopBtn");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      backToTopBtn.classList.add("show");
+    } else {
+      backToTopBtn.classList.remove("show");
+    }
+  });
+
+  backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
         // Ensure page starts at top on load
         window.addEventListener('load', () => {
             window.scrollTo(0, 0);
@@ -638,5 +679,6 @@
             }
         });
     </script>
+<button id="backToTopBtn" title="Back to Top">↑ Top</button>
 </body>
 </html>
