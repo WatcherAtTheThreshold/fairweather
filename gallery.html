@@ -5,13 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fairweather Gallery</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
+      font-family: 'Georgia', 'Times New Roman', serif;
       background: #0a0a0a;
       color: #e8e8e8;
-      font-family: Georgia, serif;
+      overflow-x: hidden;
+      line-height: 1.6;
       padding-top: 5rem;
     }
 
+    /* Mist overlay backgrounds - matching index */
+    .mist-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.4;
+      background-size: cover;
+      background-position: center;
+      animation: mistFloat 25s ease-in-out infinite;
+    }
+
+    .mist-1 {
+      background-image: url('images/mist1.webp');
+      animation-delay: 0s;
+    }
+
+    .mist-2 {
+      background-image: url('images/mist2.webp');
+      animation-delay: -12s;
+      opacity: 0.3;
+    }
+
+    @keyframes mistFloat {
+      0%, 100% { transform: translateX(0px) translateY(0px) scale(1); }
+      25% { transform: translateX(-15px) translateY(-8px) scale(1.01); }
+      50% { transform: translateX(12px) translateY(-15px) scale(0.99); }
+      75% { transform: translateX(-8px) translateY(8px) scale(1.005); }
+    }
+
+    /* Navigation - matching index exactly */
     nav {
       position: fixed;
       top: 0;
@@ -26,7 +68,7 @@
     .nav-links {
       display: flex;
       justify-content: center;
-      gap: 2rem;
+      gap: 2.5rem;
       flex-wrap: wrap;
     }
 
@@ -34,58 +76,111 @@
       color: #deb887;
       text-decoration: none;
       font-size: 1rem;
+      transition: all 0.3s ease;
       padding: 0.5rem 1rem;
+      border-radius: 20px;
+      border: 1px solid transparent;
     }
 
     .nav-links a:hover {
       color: #f4e4bc;
-      border-bottom: 1px solid #deb887;
+      border-color: #deb887;
+      background: rgba(222, 184, 135, 0.1);
     }
 
+    /* Gallery Header */
+    .gallery-header {
+      position: relative;
+      z-index: 5;
+      text-align: center;
+      padding: 4rem 2rem 2rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .gallery-title {
+      font-size: 3.5rem;
+      color: #deb887;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(45deg, #deb887, #f4e4bc, #cd853f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: titleGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes titleGlow {
+      0% { filter: drop-shadow(0 0 5px rgba(222, 184, 135, 0.3)); }
+      100% { filter: drop-shadow(0 0 15px rgba(222, 184, 135, 0.6)); }
+    }
+
+    .gallery-subtitle {
+      font-size: 1.3rem;
+      color: #c0c0c0;
+      margin-bottom: 3rem;
+      font-style: italic;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Gallery Grid */
     .gallery-grid {
+      position: relative;
+      z-index: 5;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2rem;
-      padding: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+      padding: 2rem 3rem;
       max-width: 1600px;
       margin: 0 auto;
     }
 
     .gallery-item {
-      background: #fff;
-      color: #000;
+      background: rgba(20, 20, 20, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(139, 69, 19, 0.3);
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      transition: all 0.4s ease;
+      cursor: pointer;
     }
 
     .gallery-item:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(139, 69, 19, 0.3);
+      border-color: rgba(222, 184, 135, 0.5);
+      background: rgba(30, 25, 20, 0.95);
     }
 
     .gallery-item img {
       width: 100%;
-      height: 250px;
+      height: 280px;
       object-fit: cover;
       display: block;
+      transition: all 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+      filter: brightness(1.1) contrast(1.05);
     }
 
     .image-caption {
-      padding: 1rem;
-      font-size: 1rem;
+      padding: 1.5rem;
+      font-size: 1.1rem;
       text-align: center;
+      color: #deb887;
+      font-weight: 500;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+      transition: color 0.3s ease;
     }
 
-    footer {
-      background: #000;
-      color: #888;
-      text-align: center;
-      padding: 2rem 1rem;
-      border-top: 1px solid #333;
-      margin-top: 5rem;
+    .gallery-item:hover .image-caption {
+      color: #f4e4bc;
     }
-  
+
+    /* Back to Top Button */
     #backToTopBtn {
       position: fixed;
       bottom: 40px;
@@ -114,6 +209,7 @@
       box-shadow: 0 8px 25px rgba(139, 69, 19, 0.5);
     }
 
+    /* Lightbox */
     #lightboxOverlay {
       position: fixed;
       display: none;
@@ -122,7 +218,8 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,0.95);
+      background-color: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(5px);
     }
 
     #lightboxOverlay img {
@@ -132,12 +229,127 @@
       max-height: 90%;
       position: absolute;
       top: 0; left: 0; bottom: 0; right: 0;
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 50px rgba(222, 184, 135, 0.3);
+      border-radius: 8px;
     }
 
-</style>
+    #lightboxOverlay::before {
+      content: '✕';
+      position: absolute;
+      top: 2rem;
+      right: 3rem;
+      color: #deb887;
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 1001;
+      transition: color 0.3s ease;
+    }
+
+    #lightboxOverlay:hover::before {
+      color: #f4e4bc;
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 5;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(15px);
+      color: #888;
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(139, 69, 19, 0.3);
+      margin-top: 5rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #b8b8b8;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #deb887;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .gallery-title {
+        font-size: 3rem;
+      }
+
+      .nav-links {
+        gap: 2rem;
+        font-size: 0.95rem;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .gallery-title {
+        font-size: 2.5rem;
+      }
+
+      .nav-links {
+        gap: 1.5rem;
+        font-size: 0.9rem;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
+        padding: 1.5rem;
+      }
+
+      .gallery-item img {
+        height: 250px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-title {
+        font-size: 2rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+        font-size: 0.85rem;
+      }
+
+      nav {
+        padding: 0.8rem 1rem;
+      }
+
+      .gallery-header {
+        padding: 3rem 1rem 1rem 1rem;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
+  <!-- Mist layers for atmosphere -->
+  <div class="mist-layer mist-1"></div>
+  <div class="mist-layer mist-2"></div>
+
   <nav>
     <div class="nav-links">
       <a href="index.html">Home</a>
@@ -147,76 +359,88 @@
     </div>
   </nav>
 
+  <header class="gallery-header">
+    <h1 class="gallery-title">Sacred Gallery</h1>
+    <p class="gallery-subtitle">Where divine inspiration meets earthly creation</p>
+  </header>
+
   <main>
     <section class="gallery-grid">
       <!-- BEGIN GALLERY ITEMS -->
       <div class="gallery-item"><img src="images/AlexandraPortrait.png" alt="Alexandra Portrait"><div class="image-caption">Alexandra Portrait</div></div>
-      <div class="gallery-item"><img src="images/Atrium2.png" alt="Atrium2"><div class="image-caption">Atrium2</div></div>
-      <div class="gallery-item"><img src="images/IMG-3870.png" alt="IMG-3870"><div class="image-caption">Study</div></div>
-      <div class="gallery-item"><img src="images/BarnOwlandSnowMoon.webp" alt="BarnOwlandSnowMoon"><div class="image-caption">BarnOwlandSnowMoon</div></div>
-      <div class="gallery-item"><img src="images/Birch.png" alt="Birch"><div class="image-caption">Birch</div></div>
-      <div class="gallery-item"><img src="images/BirchesWc.png" alt="BirchesWc"><div class="image-caption">BirchesWc</div></div>
-      <div class="gallery-item"><img src="images/BirchMeadow.png" alt="BirchMeadow"><div class="image-caption">BirchMeadow</div></div>
-      <div class="gallery-item"><img src="images/BlueLandscape.png" alt="BlueLandscape"><div class="image-caption">BlueLandscape</div></div>
+      <div class="gallery-item"><img src="images/Atrium2.png" alt="Atrium2"><div class="image-caption">Sacred Atrium</div></div>
+      <div class="gallery-item"><img src="images/IMG-3870.png" alt="IMG-3870"><div class="image-caption">Light Study</div></div>
+      <div class="gallery-item"><img src="images/BarnOwlandSnowMoon.webp" alt="BarnOwlandSnowMoon"><div class="image-caption">Barn Owl & Snow Moon</div></div>
+      <div class="gallery-item"><img src="images/Birch.png" alt="Birch"><div class="image-caption">Birch Grove</div></div>
+      <div class="gallery-item"><img src="images/BirchesWc.png" alt="BirchesWc"><div class="image-caption">Birches in Watercolor</div></div>
+      <div class="gallery-item"><img src="images/BirchMeadow.png" alt="BirchMeadow"><div class="image-caption">Birch Meadow</div></div>
+      <div class="gallery-item"><img src="images/BlueLandscape.png" alt="BlueLandscape"><div class="image-caption">Blue Landscape</div></div>
       <div class="gallery-item"><img src="images/Chickadee.png" alt="Chickadee"><div class="image-caption">Chickadee</div></div>
-      <div class="gallery-item"><img src="images/DylansBDayCard.png" alt="DylansBDayCard"><div class="image-caption">DylansBDayCard</div></div>
-      <div class="gallery-item"><img src="images/Ellie and the Cosmic Swaddle.png" alt="Ellie and the Cosmic Swaddle"><div class="image-caption">Ellie and the Cosmic Swaddle</div></div>
-      <div class="gallery-item"><img src="images/EvenTheSmallestThings.png" alt="EvenTheSmallestThings"><div class="image-caption">EvenTheSmallestThings</div></div>
-      <div class="gallery-item"><img src="images/FeePortrait.png" alt="FeePortrait"><div class="image-caption">FeePortrait</div></div>
-      <div class="gallery-item"><img src="images/Flowers.png" alt="Flowers"><div class="image-caption">Flowers</div></div>
-      <div class="gallery-item"><img src="images/GazingBall-2.png" alt="GazingBall"><div class="image-caption">GazingBall</div></div>
-      <div class="gallery-item"><img src="images/GoldenInvitation.png" alt="GoldenInvitation"><div class="image-caption">GoldenInvitation</div></div>
-      <div class="gallery-item"><img src="images/IMG_0131.png" alt="IMG_0131"><div class="image-caption">Study</div></div>
-      <div class="gallery-item"><img src="images/under-the-aegis-of-ishtarr.webp" alt="MinervasWisdom"><div class="image-caption">Under the Aegis of Ishtar</div></div>
-      <div class="gallery-item"><img src="images/IMG-3868.png" alt="IMG-3868"><div class="image-caption">Study</div></div>
-      <div class="gallery-item"><img src="images/IMG-3869.png" alt="IMG-3869"><div class="image-caption">Study</div></div>
-      <div class="gallery-item"><img src="images/Shan-Flame.png" alt="Shan-Flame"><div class="image-caption">Shan-Flame</div></div>
-      <div class="gallery-item"><img src="images/JenAndTerry.png" alt="JenAndTerry"><div class="image-caption">JenAndTerry</div></div>
-      <div class="gallery-item"><img src="images/JessopPortrait.png" alt="JessopPortrait"><div class="image-caption">JessopPortrait</div></div>
-      <div class="gallery-item"><img src="images/LaPuertaAzul.png" alt="LaPuertaAzul"><div class="image-caption">LaPuertaAzul</div></div>
-      <div class="gallery-item"><img src="images/MinervasWisdom.webp" alt="MinervasWisdom"><div class="image-caption">MinervasWisdom</div></div>
-     <div class="gallery-item"><img src="images/Shan-Forget-Ink22.png" alt="Shan-Forget-Ink22"><div class="image-caption">Forget-Ink22</div></div>
-      <div class="gallery-item"><img src="images/MoonGarden-CC.png" alt="MoonGarden"><div class="image-caption">MoonGarden</div></div>
-      <div class="gallery-item"><img src="images/MoonlightDoctrine.png" alt="MoonlightDoctrine"><div class="image-caption">MoonlightDoctrine</div></div>
-      <div class="gallery-item"><img src="images/MorningPrayer.png" alt="MorningPrayer"><div class="image-caption">MorningPrayer</div></div>
-      <div class="gallery-item"><img src="images/MrBinnSmallerFile.png" alt="MrBinn"><div class="image-caption">MrBinn</div></div>
-      <div class="gallery-item"><img src="images/NerudaAoede-CC.png" alt="NerudaAoede"><div class="image-caption">NerudaAoede</div></div>
+      <div class="gallery-item"><img src="images/DylansBDayCard.png" alt="DylansBDayCard"><div class="image-caption">Dylan's Birthday Card</div></div>
+      <div class="gallery-item"><img src="images/Ellie and the Cosmic Swaddle.png" alt="Ellie and the Cosmic Swaddle"><div class="image-caption">Ellie & the Cosmic Swaddle</div></div>
+      <div class="gallery-item"><img src="images/EvenTheSmallestThings.png" alt="EvenTheSmallestThings"><div class="image-caption">Even the Smallest Things</div></div>
+      <div class="gallery-item"><img src="images/FeePortrait.png" alt="FeePortrait"><div class="image-caption">Fee Portrait</div></div>
+      <div class="gallery-item"><img src="images/Flowers.png" alt="Flowers"><div class="image-caption">Botanical Dreams</div></div>
+      <div class="gallery-item"><img src="images/GazingBall-2.png" alt="GazingBall"><div class="image-caption">Gazing Ball</div></div>
+      <div class="gallery-item"><img src="images/GoldenInvitation.png" alt="GoldenInvitation"><div class="image-caption">Golden Invitation</div></div>
+      <div class="gallery-item"><img src="images/IMG_0131.png" alt="IMG_0131"><div class="image-caption">Color Study</div></div>
+      <div class="gallery-item"><img src="images/under-the-aegis-of-ishtarr.webp" alt="Under the Aegis of Ishtar"><div class="image-caption">Under the Aegis of Ishtar</div></div>
+      <div class="gallery-item"><img src="images/IMG-3868.png" alt="IMG-3868"><div class="image-caption">Shadow Study</div></div>
+      <div class="gallery-item"><img src="images/IMG-3869.png" alt="IMG-3869"><div class="image-caption">Form Study</div></div>
+      <div class="gallery-item"><img src="images/Shan-Flame.png" alt="Shan-Flame"><div class="image-caption">Shannon in Flame</div></div>
+      <div class="gallery-item"><img src="images/JenAndTerry.png" alt="JenAndTerry"><div class="image-caption">Jen & Terry</div></div>
+      <div class="gallery-item"><img src="images/JessopPortrait.png" alt="JessopPortrait"><div class="image-caption">Jessop Portrait</div></div>
+      <div class="gallery-item"><img src="images/LaPuertaAzul.png" alt="LaPuertaAzul"><div class="image-caption">La Puerta Azul</div></div>
+      <div class="gallery-item"><img src="images/MinervasWisdom.webp" alt="MinervasWisdom"><div class="image-caption">Minerva's Wisdom</div></div>
+      <div class="gallery-item"><img src="images/Shan-Forget-Ink22.png" alt="Shan-Forget-Ink22"><div class="image-caption">Forget-Me-Not Ink</div></div>
+      <div class="gallery-item"><img src="images/MoonGarden-CC.png" alt="MoonGarden"><div class="image-caption">Moon Garden</div></div>
+      <div class="gallery-item"><img src="images/MoonlightDoctrine.png" alt="MoonlightDoctrine"><div class="image-caption">Moonlight Doctrine</div></div>
+      <div class="gallery-item"><img src="images/MorningPrayer.png" alt="MorningPrayer"><div class="image-caption">Morning Prayer</div></div>
+      <div class="gallery-item"><img src="images/MrBinnSmallerFile.png" alt="MrBinn"><div class="image-caption">Mr. Binn</div></div>
+      <div class="gallery-item"><img src="images/NerudaAoede-CC.png" alt="NerudaAoede"><div class="image-caption">Neruda Aoede</div></div>
       <div class="gallery-item"><img src="images/Nuthatch.png" alt="Nuthatch"><div class="image-caption">Nuthatch</div></div>
-      <div class="gallery-item"><img src="images/PaintedLady.png" alt="PaintedLady"><div class="image-caption">PaintedLady</div></div>
-      <div class="gallery-item"><img src="images/PotniaTheron.webp" alt="PotniaTheron"><div class="image-caption">PotniaTheron</div></div>
-      <div class="gallery-item"><img src="images/RowanPortrait.png" alt="RowanPortrait"><div class="image-caption">RowanPortrait</div></div>
-      <div class="gallery-item"><img src="images/SaraQuinn.png" alt="SaraQuinn"><div class="image-caption">SaraQuinn</div></div>
-      <div class="gallery-item"><img src="images/ShadowoftheMountain.png" alt="ShadowoftheMountain"><div class="image-caption">ShadowoftheMountain</div></div>
-      <div class="gallery-item"><img src="images/Shan-Crabby.png" alt="Shan-Crabby"><div class="image-caption">Crabby</div></div>
-      <div class="gallery-item"><img src="images/Shan-Ego-Ink22.png" alt="Shan-Ego-Ink22"><div class="image-caption">Ego22</div></div>
-      <div class="gallery-item"><img src="images/under-the-aegis-of-inanna.webp" alt="MinervasWisdom"><div class="image-caption">Under the Aegis of Inanna</div></div>
-      
-      <div class="gallery-item"><img src="images/ShanPortrait.png" alt="ShanPortrait"><div class="image-caption">ShanPortrait</div></div>
-      <div class="gallery-item"><img src="images/Shan-Trip-Ink22-ForWeb.png" alt="Shan-Trip-Ink22-ForWeb"><div class="image-caption">Shan-Trip-Ink22-ForWeb</div></div>
+      <div class="gallery-item"><img src="images/PaintedLady.png" alt="PaintedLady"><div class="image-caption">Painted Lady</div></div>
+      <div class="gallery-item"><img src="images/PotniaTheron.webp" alt="PotniaTheron"><div class="image-caption">Potnia Theron</div></div>
+      <div class="gallery-item"><img src="images/RowanPortrait.png" alt="RowanPortrait"><div class="image-caption">Rowan Portrait</div></div>
+      <div class="gallery-item"><img src="images/SaraQuinn.png" alt="SaraQuinn"><div class="image-caption">Sara Quinn</div></div>
+      <div class="gallery-item"><img src="images/ShadowoftheMountain.png" alt="ShadowoftheMountain"><div class="image-caption">Shadow of the Mountain</div></div>
+      <div class="gallery-item"><img src="images/Shan-Crabby.png" alt="Shan-Crabby"><div class="image-caption">Crabby Mood</div></div>
+      <div class="gallery-item"><img src="images/Shan-Ego-Ink22.png" alt="Shan-Ego-Ink22"><div class="image-caption">Ego Ink Study</div></div>
+      <div class="gallery-item"><img src="images/under-the-aegis-of-inanna.webp" alt="Under the Aegis of Inanna"><div class="image-caption">Under the Aegis of Inanna</div></div>
+      <div class="gallery-item"><img src="images/ShanPortrait.png" alt="ShanPortrait"><div class="image-caption">Shannon Portrait</div></div>
+      <div class="gallery-item"><img src="images/Shan-Trip-Ink22-ForWeb.png" alt="Shan-Trip-Ink22-ForWeb"><div class="image-caption">Triptych Ink Study</div></div>
       <div class="gallery-item"><img src="images/Solitude.png" alt="Solitude"><div class="image-caption">Solitude</div></div>
-      <div class="gallery-item"><img src="images/StarryBackground.png" alt="StarryBackground"><div class="image-caption">StarryBackground</div></div>
-      <div class="gallery-item"><img src="images/SummerStroll.png" alt="SummerStroll"><div class="image-caption">SummerStroll</div></div>
-      <div class="gallery-item"><img src="images/SunriseDoctrine.png" alt="SunriseDoctrine"><div class="image-caption">SunriseDoctrine</div></div>
-      <div class="gallery-item"><img src="images/TheExplorerandBlueWing.png" alt="TheExplorerandBlueWing"><div class="image-caption">TheExplorerandBlueWing</div></div>
-      <div class="gallery-item"><img src="images/ThePaintedLady.png" alt="ThePaintedLady"><div class="image-caption">ThePaintedLady</div></div>
-      <div class="gallery-item"><img src="images/ThePokeWitch.png" alt="ThePokeWitch"><div class="image-caption">ThePokeWitch</div></div>
-      <div class="gallery-item"><img src="images/TheSoundofFallingSnow.webp" alt="TheSoundofFallingSnow"><div class="image-caption">TheSoundofFallingSnow</div></div>
-      <div class="gallery-item"><img src="images/TwoChickadees.png" alt="TwoChickadees"><div class="image-caption">TwoChickadees</div></div>
-      <div class="gallery-item"><img src="images/WizardScreen.png" alt="WizardScreen"><div class="image-caption">WizardScreen</div></div>
-      <div class="gallery-item"><img src="images/WoodsView.png" alt="WoodsView"><div class="image-caption">WoodsView</div></div>
-      <div class="gallery-item"><img src="images/WoodsView2Screen.png" alt="WoodsView2Screen"><div class="image-caption">WoodsView2Screen</div></div>
-      <div class="gallery-item"><img src="images/WorkingThrough.png" alt="WorkingThrough"><div class="image-caption">WorkingThrough</div></div>
-      <div class="gallery-item"><img src="images/YellowLandscape.png" alt="YellowLandscape"><div class="image-caption">YellowLandscape</div></div>
+      <div class="gallery-item"><img src="images/StarryBackground.png" alt="StarryBackground"><div class="image-caption">Starry Background</div></div>
+      <div class="gallery-item"><img src="images/SummerStroll.png" alt="SummerStroll"><div class="image-caption">Summer Stroll</div></div>
+      <div class="gallery-item"><img src="images/SunriseDoctrine.png" alt="SunriseDoctrine"><div class="image-caption">Sunrise Doctrine</div></div>
+      <div class="gallery-item"><img src="images/TheExplorerandBlueWing.png" alt="TheExplorerandBlueWing"><div class="image-caption">The Explorer & Blue Wing</div></div>
+      <div class="gallery-item"><img src="images/ThePaintedLady.png" alt="ThePaintedLady"><div class="image-caption">The Painted Lady</div></div>
+      <div class="gallery-item"><img src="images/ThePokeWitch.png" alt="ThePokeWitch"><div class="image-caption">The Poke Witch</div></div>
+      <div class="gallery-item"><img src="images/TheSoundofFallingSnow.webp" alt="TheSoundofFallingSnow"><div class="image-caption">The Sound of Falling Snow</div></div>
+      <div class="gallery-item"><img src="images/TwoChickadees.png" alt="TwoChickadees"><div class="image-caption">Two Chickadees</div></div>
+      <div class="gallery-item"><img src="images/WizardScreen.png" alt="WizardScreen"><div class="image-caption">Wizard Screen</div></div>
+      <div class="gallery-item"><img src="images/WoodsView.png" alt="WoodsView"><div class="image-caption">Woods View</div></div>
+      <div class="gallery-item"><img src="images/WoodsView2Screen.png" alt="WoodsView2Screen"><div class="image-caption">Woods View II</div></div>
+      <div class="gallery-item"><img src="images/WorkingThrough.png" alt="WorkingThrough"><div class="image-caption">Working Through</div></div>
+      <div class="gallery-item"><img src="images/YellowLandscape.png" alt="YellowLandscape"><div class="image-caption">Golden Fields</div></div>
       <!-- END GALLERY ITEMS -->
     </section>
   </main>
 
   <footer>
-    <p>© 2025 Fairweather Studios • Jessop & Shannon Hunt</p>
+    <div class="footer-links">
+      <a href="https://watcheratthethreshold.github.io/sketchy-ponderings/">Sketchy Ponderings</a>
+      <a href="https://watcheratthethreshold.github.io/the-second-gaze/">The Second Gaze</a>
+      <a href="#newsletter">Newsletter</a>
+      <a href="#commission">Commissions</a>
+    </div>
+    <p style="color: #888; margin-top: 1rem;">
+      © 2025 Fairweather Studios • Jessop & Shannon Hunt • Where Art & Love Converge
+    </p>
   </footer>
 
   <!-- Back to Top Button -->
-  <button id="backToTopBtn" title="Back to Top">↑</button>
+  <button id="backToTopBtn" title="Back to Top">↑ Top</button>
 
   <!-- Lightbox -->
   <div id="lightboxOverlay"><img id="lightboxImg" src=""></div>
@@ -245,7 +469,19 @@
     lightbox.addEventListener("click", () => {
       lightbox.style.display = "none";
     });
-  </script>
 
+    // Mist movement on scroll (subtle)
+    window.addEventListener('scroll', () => {
+      const mist1 = document.querySelector('.mist-1');
+      const mist2 = document.querySelector('.mist-2');
+      if (mist1) mist1.style.transform = `translateX(${window.scrollY * 0.02}px)`;
+      if (mist2) mist2.style.transform = `translateX(${window.scrollY * 0.01}px)`;
+    });
+
+    // Ensure page starts at top on load
+    window.addEventListener('load', () => {
+      window.scrollTo(0, 0);
+    });
+  </script>
 </body>
 </html>
