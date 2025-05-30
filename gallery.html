@@ -53,6 +53,43 @@
       75% { transform: translateX(-8px) translateY(8px) scale(1.005); }
     }
 
+    /* Floating particles animation */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(222, 184, 135, 0.6);
+      border-radius: 50%;
+      animation: float 15s infinite linear;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
     /* Navigation - matching index exactly */
     nav {
       position: fixed;
@@ -123,6 +160,36 @@
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
     }
 
+    /* Gallery Controls */
+    .gallery-controls {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .view-toggle {
+      padding: 0.8rem 1.5rem;
+      background: rgba(20, 20, 20, 0.8);
+      border: 1px solid rgba(139, 69, 19, 0.4);
+      color: #deb887;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Georgia', serif;
+    }
+
+    .view-toggle:hover,
+    .view-toggle.active {
+      background: linear-gradient(45deg, #8B4513, #A0522D);
+      border-color: #deb887;
+      color: #f4e4bc;
+      transform: translateY(-2px);
+    }
+
     /* Gallery Grid */
     .gallery-grid {
       position: relative;
@@ -133,6 +200,12 @@
       padding: 2rem 3rem;
       max-width: 1600px;
       margin: 0 auto;
+      transition: all 0.5s ease;
+    }
+
+    .gallery-grid.masonry {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-auto-rows: 10px;
     }
 
     .gallery-item {
@@ -144,6 +217,21 @@
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
       transition: all 0.4s ease;
       cursor: pointer;
+      position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: revealImage 0.6s ease forwards;
+    }
+
+    .gallery-item.masonry {
+      grid-row-end: span var(--row-span);
+    }
+
+    @keyframes revealImage {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .gallery-item:hover {
@@ -153,12 +241,59 @@
       background: rgba(30, 25, 20, 0.95);
     }
 
+    /* Image loading shimmer effect */
+    .gallery-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(222, 184, 135, 0.2),
+        transparent
+      );
+      transition: left 0.6s ease;
+      z-index: 1;
+    }
+
+    .gallery-item:hover::before {
+      left: 100%;
+    }
+
+    /* Artistic frame effect on hover */
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      background: linear-gradient(45deg, #deb887, #f4e4bc) border-box;
+      mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      mask-composite: xor;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .gallery-item:hover::after {
+      opacity: 0.6;
+    }
+
     .gallery-item img {
       width: 100%;
       height: 280px;
       object-fit: cover;
       display: block;
       transition: all 0.4s ease;
+      position: relative;
+      z-index: 0;
     }
 
     .gallery-item:hover img {
@@ -174,10 +309,48 @@
       font-weight: 500;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
       transition: color 0.3s ease;
+      position: relative;
+      z-index: 2;
     }
 
     .gallery-item:hover .image-caption {
       color: #f4e4bc;
+    }
+
+    /* Spotlight effect */
+    .gallery-spotlight {
+      position: fixed;
+      pointer-events: none;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(
+        circle,
+        rgba(222, 184, 135, 0.15) 0%,
+        rgba(222, 184, 135, 0.05) 40%,
+        transparent 70%
+      );
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 3;
+      mix-blend-mode: screen;
+    }
+
+    /* Sparkles */
+    .sparkle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #deb887;
+      border-radius: 50%;
+      animation: sparkle 2s infinite;
+      z-index: 4;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      50% { opacity: 1; transform: scale(1); }
     }
 
     /* Back to Top Button */
@@ -317,6 +490,11 @@
       .gallery-item img {
         height: 250px;
       }
+
+      .gallery-controls {
+        flex-direction: column;
+        align-items: center;
+      }
     }
 
     @media (max-width: 480px) {
@@ -349,6 +527,12 @@
   <!-- Mist layers for atmosphere -->
   <div class="mist-layer mist-1"></div>
   <div class="mist-layer mist-2"></div>
+  
+  <!-- Floating particles -->
+  <div class="particles" id="particles"></div>
+  
+  <!-- Gallery spotlight effect -->
+  <div class="gallery-spotlight" id="gallerySpotlight"></div>
 
   <nav>
     <div class="nav-links">
@@ -364,8 +548,13 @@
     <p class="gallery-subtitle">Where divine inspiration meets earthly creation</p>
   </header>
 
+  <div class="gallery-controls">
+    <button class="view-toggle active" data-view="grid">Gallery View</button>
+    <button class="view-toggle" data-view="masonry">Artistic View</button>
+  </div>
+
   <main>
-    <section class="gallery-grid">
+    <section class="gallery-grid" id="galleryGrid">
       <!-- BEGIN GALLERY ITEMS -->
       <div class="gallery-item"><img src="images/AlexandraPortrait.png" alt="Alexandra Portrait"><div class="image-caption">Alexandra Portrait</div></div>
       <div class="gallery-item"><img src="images/Atrium2.png" alt="Atrium2"><div class="image-caption">Sacred Atrium</div></div>
@@ -446,6 +635,115 @@
   <div id="lightboxOverlay"><img id="lightboxImg" src=""></div>
 
   <script>
+    // Create floating particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 60;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Add sparkles randomly
+    function addRandomSparkles() {
+      const sparkleCount = 5;
+      const body = document.body;
+      
+      for (let i = 0; i < sparkleCount; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.position = 'fixed';
+        sparkle.style.left = Math.random() * 100 + '%';
+        sparkle.style.top = Math.random() * 100 + '%';
+        sparkle.style.animationDelay = Math.random() * 2 + 's';
+        sparkle.style.zIndex = '2';
+        body.appendChild(sparkle);
+        
+        // Remove sparkle after animation
+        setTimeout(() => {
+          if (sparkle.parentNode) {
+            sparkle.parentNode.removeChild(sparkle);
+          }
+        }, 2000);
+      }
+    }
+
+    // Gallery spotlight effect
+    const spotlight = document.getElementById('gallerySpotlight');
+    let isSpotlightActive = false;
+
+    document.addEventListener('mousemove', (e) => {
+      if (e.target.closest('.gallery-item')) {
+        spotlight.style.left = e.clientX + 'px';
+        spotlight.style.top = e.clientY + 'px';
+        spotlight.style.opacity = '1';
+        isSpotlightActive = true;
+      } else if (isSpotlightActive) {
+        spotlight.style.opacity = '0';
+        isSpotlightActive = false;
+      }
+    });
+
+    // View toggle functionality
+    const viewToggles = document.querySelectorAll('.view-toggle');
+    const galleryGrid = document.getElementById('galleryGrid');
+
+    viewToggles.forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        viewToggles.forEach(t => t.classList.remove('active'));
+        toggle.classList.add('active');
+        
+        const view = toggle.dataset.view;
+        if (view === 'masonry') {
+          enableMasonryView();
+        } else {
+          enableGridView();
+        }
+      });
+    });
+
+    function enableMasonryView() {
+      galleryGrid.classList.add('masonry');
+      const items = document.querySelectorAll('.gallery-item');
+      
+      items.forEach((item, index) => {
+        setTimeout(() => {
+          const img = item.querySelector('img');
+          const aspectRatio = img.naturalHeight / img.naturalWidth;
+          const baseHeight = 280;
+          const newHeight = Math.max(200, Math.min(400, baseHeight * aspectRatio));
+          const rowSpan = Math.ceil((newHeight + 20) / 10);
+          
+          item.style.setProperty('--row-span', rowSpan);
+          item.classList.add('masonry');
+        }, index * 50);
+      });
+    }
+
+    function enableGridView() {
+      galleryGrid.classList.remove('masonry');
+      const items = document.querySelectorAll('.gallery-item');
+      
+      items.forEach(item => {
+        item.classList.remove('masonry');
+        item.style.removeProperty('--row-span');
+      });
+    }
+
+    // Staggered image reveal animation
+    function animateGalleryItems() {
+      const items = document.querySelectorAll('.gallery-item');
+      items.forEach((item, index) => {
+        item.style.animationDelay = `${index * 0.1}s`;
+      });
+    }
+
     // Back to top logic
     const backToTopBtn = document.getElementById("backToTopBtn");
     window.addEventListener("scroll", () => {
@@ -463,11 +761,35 @@
       img.addEventListener("click", () => {
         lightboxImg.src = img.src;
         lightbox.style.display = "block";
+        // Add shimmer effect to lightbox
+        lightbox.style.animation = 'fadeIn 0.3s ease';
       });
     });
 
     lightbox.addEventListener("click", () => {
       lightbox.style.display = "none";
+    });
+
+    // Add hover sparkles to gallery items
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('mouseenter', function() {
+        const sparkleCount = 3;
+        for (let i = 0; i < sparkleCount; i++) {
+          const sparkle = document.createElement('div');
+          sparkle.className = 'sparkle';
+          sparkle.style.position = 'absolute';
+          sparkle.style.left = Math.random() * 100 + '%';
+          sparkle.style.top = Math.random() * 100 + '%';
+          sparkle.style.animationDelay = Math.random() * 2 + 's';
+          this.appendChild(sparkle);
+          
+          setTimeout(() => {
+            if (sparkle.parentNode) {
+              sparkle.parentNode.removeChild(sparkle);
+            }
+          }, 2000);
+        }
+      });
     });
 
     // Mist movement on scroll (subtle)
@@ -478,10 +800,39 @@
       if (mist2) mist2.style.transform = `translateX(${window.scrollY * 0.01}px)`;
     });
 
-    // Ensure page starts at top on load
-    window.addEventListener('load', () => {
+    // Initialize effects
+    document.addEventListener('DOMContentLoaded', function() {
+      createParticles();
+      setInterval(addRandomSparkles, 4000);
+      animateGalleryItems();
+      
+      // Ensure page starts at top on load
       window.scrollTo(0, 0);
+      
+      // Wait for images to load before enabling masonry calculations
+      const images = document.querySelectorAll('.gallery-item img');
+      let loadedImages = 0;
+      
+      images.forEach(img => {
+        if (img.complete) {
+          loadedImages++;
+        } else {
+          img.addEventListener('load', () => {
+            loadedImages++;
+          });
+        }
+      });
     });
+
+    // Add fade-in animation for lightbox
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+    `;
+    document.head.appendChild(style);
   </script>
 </body>
 </html>
