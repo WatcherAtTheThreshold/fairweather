@@ -52,6 +52,43 @@
             75% { transform: translateX(-8px) translateY(8px) scale(1.005); }
         }
 
+        /* Floating particles animation */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(222, 184, 135, 0.6);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
         /* Navigation */
         nav {
             position: fixed;
@@ -279,6 +316,7 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             color: #333;
+            position: relative;
         }
 
         .artwork-card:hover {
@@ -331,6 +369,21 @@
             margin-left: auto;
             margin-right: auto;
             font-style: italic;
+        }
+
+        /* Sparkles */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #deb887;
+            border-radius: 50%;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
         }
 
         footer {
@@ -524,6 +577,9 @@
     <div class="mist-layer mist-1"></div>
     <div class="mist-layer mist-2"></div>
     
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div>
+    
     <nav>
         <div class="nav-links">
             <a href="index.html">Home</a>
@@ -637,6 +693,45 @@
     <button id="backToTopBtn" title="Back to Top">↑ Top</button>
 
     <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 60;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Add sparkles randomly
+        function addRandomSparkles() {
+            const sparkleCount = 5;
+            const body = document.body;
+            
+            for (let i = 0; i < sparkleCount; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.position = 'fixed';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                sparkle.style.zIndex = '2';
+                body.appendChild(sparkle);
+                
+                // Remove sparkle after animation
+                setTimeout(() => {
+                    if (sparkle.parentNode) {
+                        sparkle.parentNode.removeChild(sparkle);
+                    }
+                }, 2000);
+            }
+        }
+
         const backToTopBtn = document.getElementById("backToTopBtn");
 
         window.addEventListener("scroll", () => {
@@ -649,11 +744,6 @@
 
         backToTopBtn.addEventListener("click", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-
-        // Ensure page starts at top on load
-        window.addEventListener('load', () => {
-            window.scrollTo(0, 0);
         });
 
         // Smooth scrolling for navigation
@@ -682,6 +772,34 @@
                 label.style.opacity = (window.scrollY > 50) ? '0' : '1';
                 label.style.transition = 'opacity 0.4s ease';
             }
+        });
+
+        // Add hover effect to artwork cards for sparkles
+        document.querySelectorAll('.artwork-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.position = 'absolute';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.zIndex = '3';
+                this.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    if (sparkle.parentNode) {
+                        sparkle.parentNode.removeChild(sparkle);
+                    }
+                }, 2000);
+            });
+        });
+
+        // Initialize effects
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            setInterval(addRandomSparkles, 4000);
+            
+            // Ensure page starts at top on load
+            window.scrollTo(0, 0);
         });
     </script>
 </body>
