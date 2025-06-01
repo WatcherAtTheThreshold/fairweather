@@ -544,12 +544,14 @@
       transition: opacity 0.3s ease, transform 0.2s ease;
       opacity: 0;
       pointer-events: none;
+      position: relative;
+      overflow: hidden;
     }
 
     body.studio-theme #backToTopBtn {
-      background: linear-gradient(45deg, #3498db, #2980b9, #2471a3);
-      color: #ffffff;
-      box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+      background: linear-gradient(45deg, #1a2650, #0f1940, #253246);
+      color: #f4e4bc;
+      box-shadow: 0 4px 15px rgba(26, 38, 80, 0.3);
     }
 
     #backToTopBtn.show {
@@ -563,7 +565,7 @@
     }
 
     body.studio-theme #backToTopBtn:hover {
-      box-shadow: 0 8px 25px rgba(52, 152, 219, 0.5);
+      box-shadow: 0 8px 25px rgba(26, 38, 80, 0.5);
     }
 
     /* Lightbox */
@@ -965,19 +967,9 @@
 
     // Add twinkling stars to buttons in studio view
     function addButtonStars() {
-      const buttons = document.querySelectorAll('.view-toggle');
+      const buttons = document.querySelectorAll('.view-toggle, #backToTopBtn.show');
       buttons.forEach(button => {
-        // Add 3-5 stars per button
-        const starCount = Math.floor(Math.random() * 3) + 3;
-        for (let i = 0; i < starCount; i++) {
-          const star = document.createElement('div');
-          star.className = 'button-star';
-          star.style.left = Math.random() * 80 + 10 + '%';
-          star.style.top = Math.random() * 60 + 20 + '%';
-          star.style.animationDelay = Math.random() * 3 + 's';
-          star.style.animationDuration = (Math.random() * 2 + 2) + 's';
-          button.appendChild(star);
-        }
+        addStarsToButton(button);
       });
     }
 
@@ -998,11 +990,38 @@
     // Back to top logic
     const backToTopBtn = document.getElementById("backToTopBtn");
     window.addEventListener("scroll", () => {
-      backToTopBtn.classList.toggle("show", window.scrollY > 300);
+      const shouldShow = window.scrollY > 300;
+      const wasVisible = backToTopBtn.classList.contains("show");
+      
+      backToTopBtn.classList.toggle("show", shouldShow);
+      
+      // Add stars to back to top button when it appears in studio view
+      if (shouldShow && !wasVisible && document.body.classList.contains('studio-theme')) {
+        setTimeout(() => {
+          if (backToTopBtn.querySelector('.button-star') === null) {
+            addStarsToButton(backToTopBtn);
+          }
+        }, 100);
+      }
     });
+    
     backToTopBtn.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
+
+    // Helper function to add stars to a single button
+    function addStarsToButton(button) {
+      const starCount = Math.floor(Math.random() * 3) + 3;
+      for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.className = 'button-star';
+        star.style.left = Math.random() * 80 + 10 + '%';
+        star.style.top = Math.random() * 60 + 20 + '%';
+        star.style.animationDelay = Math.random() * 3 + 's';
+        star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        button.appendChild(star);
+      }
+    }
 
     // Lightbox logic
     const lightbox = document.getElementById("lightboxOverlay");
