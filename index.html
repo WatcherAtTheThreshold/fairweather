@@ -17,6 +17,8 @@
             color: #e8e8e8;
             overflow-x: hidden;
             line-height: 1.6;
+            margin: 0;
+            padding: 0;
         }
 
         /* Mist overlay backgrounds */
@@ -28,7 +30,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.4;
+            opacity: 0.6;
             background-size: cover;
             background-position: center;
             animation: mistFloat 25s ease-in-out infinite;
@@ -42,7 +44,7 @@
         .mist-2 {
             background-image: url('images/mist-tile.png');
             animation-delay: -12s;
-            opacity: 0.3;
+            opacity: 0.5;
         }
 
         @keyframes mistFloat {
@@ -65,26 +67,39 @@
 
         .particle {
             position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(222, 184, 135, 0.6);
+            width: 3px;
+            height: 3px;
+            background: radial-gradient(circle, rgba(222, 184, 135, 0.8) 0%, rgba(222, 184, 135, 0.3) 50%, transparent 100%);
             border-radius: 50%;
-            animation: float 15s infinite linear;
+            animation: starburst 12s infinite linear;
         }
 
-        @keyframes float {
+        @keyframes starburst {
             0% {
-                transform: translateY(100vh) rotate(0deg);
+                transform: translateY(-50px) translateX(0) scale(0) rotate(0deg);
                 opacity: 0;
             }
-            10% {
+            5% {
                 opacity: 1;
+                transform: translateY(10vh) translateX(0) scale(1) rotate(45deg);
             }
-            90% {
+            15% {
+                transform: translateY(25vh) translateX(20px) scale(1.2) rotate(90deg);
+            }
+            30% {
+                transform: translateY(40vh) translateX(-15px) scale(0.8) rotate(180deg);
+            }
+            50% {
+                transform: translateY(60vh) translateX(25px) scale(1.1) rotate(270deg);
+            }
+            70% {
+                transform: translateY(80vh) translateX(-10px) scale(0.9) rotate(360deg);
+            }
+            85% {
                 opacity: 1;
             }
             100% {
-                transform: translateY(-100px) rotate(360deg);
+                transform: translateY(100vh) translateX(0) scale(0) rotate(450deg);
                 opacity: 0;
             }
         }
@@ -133,6 +148,9 @@
             justify-content: center;
             overflow: hidden;
             z-index: 5;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
         }
 
         .hero-background {
