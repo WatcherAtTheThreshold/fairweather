@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+// Hide mobile bouncing label when scrolled
+        window.addEventListener('scroll', () => {
+            const label = document.querySelector('.mobile-gallery-label');
+            if (label) {
+                label.style.opacity = (window.scrollY > 50) ? '0' : '1';
+                label.style.transition = 'opacity 0.4s ease';
+            }
+        });<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,12 +20,23 @@
 
         body {
             font-family: 'Georgia', 'Times New Roman', serif;
-            background: #0a0a0a;
+            background: linear-gradient(
+                to bottom,
+                rgba(25, 35, 70, 1) 0%,
+                rgba(15, 25, 60, 1) 30%,
+                rgba(10, 20, 50, 1) 100vh,
+                rgba(15, 25, 60, 1) 120vh,
+                rgba(20, 30, 65, 1) 140vh,
+                rgba(35, 45, 85, 1) 180vh,
+                rgba(45, 55, 95, 1) 200vh
+            );
+            background-attachment: fixed;
             color: #e8e8e8;
             overflow-x: hidden;
             line-height: 1.6;
             margin: 0;
             padding: 0;
+            min-height: 200vh;
         }
 
         /* Mist overlay backgrounds */
@@ -187,11 +205,10 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(
-                135deg, 
-                rgba(25, 35, 70, 0.3) 0%, 
-                rgba(15, 25, 60, 0.15) 40%, 
-                rgba(15, 25, 60, 0.15) 60%, 
-                rgba(25, 35, 70, 0.3) 100%
+                to bottom, 
+                rgba(0, 0, 0, 0.1) 0%, 
+                rgba(0, 0, 0, 0.05) 50%, 
+                rgba(0, 0, 0, 0.1) 100%
             );
             z-index: 3;
         }
@@ -410,7 +427,7 @@
         }
 
         footer {
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(25, 35, 70, 0.95);
             backdrop-filter: blur(15px);
             padding: 3rem 2rem;
             text-align: center;
