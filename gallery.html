@@ -89,7 +89,7 @@
       }
     }
 
-    /* Navigation - matching index exactly */
+    /* Navigation - keep blue theme even in studio view */
     nav {
       position: fixed;
       top: 0;
@@ -100,11 +100,6 @@
       border-bottom: 1px solid rgba(139, 69, 19, 0.2);
       padding: 1rem 2rem;
       transition: all 0.3s ease;
-    }
-
-    body.studio-theme nav {
-      background: rgba(255, 255, 255, 0.95);
-      border-bottom: 1px solid rgba(200, 200, 200, 0.3);
     }
 
     .nav-links {
@@ -124,20 +119,10 @@
       border: 1px solid transparent;
     }
 
-    body.studio-theme .nav-links a {
-      color: #2c3e50;
-    }
-
     .nav-links a:hover {
       color: #f4e4bc;
       border-color: #deb887;
       background: rgba(222, 184, 135, 0.1);
-    }
-
-    body.studio-theme .nav-links a:hover {
-      color: #1a252f;
-      border-color: #2c3e50;
-      background: rgba(44, 62, 80, 0.1);
     }
 
     /* Gallery Header */
@@ -161,14 +146,6 @@
       font-weight: 300;
       letter-spacing: 2px;
       animation: titleGlow 3s ease-in-out infinite alternate;
-    }
-
-    body.studio-theme .gallery-title {
-      background: linear-gradient(45deg, #2c3e50, #34495e, #3498db);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     }
 
     @keyframes titleGlow {
@@ -210,6 +187,8 @@
       cursor: pointer;
       transition: all 0.3s ease;
       font-family: 'Georgia', serif;
+      position: relative;
+      overflow: hidden;
     }
 
     body.studio-theme .view-toggle {
@@ -228,9 +207,39 @@
 
     body.studio-theme .view-toggle:hover,
     body.studio-theme .view-toggle.active {
-      background: linear-gradient(45deg, #3498db, #2980b9);
-      border-color: #2c3e50;
-      color: #ffffff;
+      background: linear-gradient(45deg, #1a2650, #0f1940, #253246);
+      border-color: #1a2650;
+      color: #f4e4bc;
+    }
+
+    /* Button star particles for studio theme */
+    .button-star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: radial-gradient(circle, #f4e4bc 0%, #deb887 50%, transparent 100%);
+      border-radius: 50%;
+      animation: buttonTwinkle 3s infinite ease-in-out;
+      pointer-events: none;
+    }
+
+    @keyframes buttonTwinkle {
+      0%, 100% { 
+        opacity: 0; 
+        transform: scale(0.3);
+      }
+      25% { 
+        opacity: 0.6; 
+        transform: scale(0.8);
+      }
+      50% { 
+        opacity: 1; 
+        transform: scale(1.2);
+      }
+      75% { 
+        opacity: 0.4; 
+        transform: scale(0.6);
+      }
     }
 
     /* Gallery Grid */
@@ -896,34 +905,34 @@
     });
 
     function enableStudioView() {
-      // Switch to light theme
+      // Switch to light theme but keep regular grid layout
       document.body.classList.add('studio-theme');
-      galleryGrid.classList.add('masonry');
+      galleryGrid.classList.remove('masonry');
       
       const items = document.querySelectorAll('.gallery-item');
       
       items.forEach((item, index) => {
         setTimeout(() => {
-          const img = item.querySelector('img');
-          const aspectRatio = img.naturalHeight / img.naturalWidth;
-          const baseHeight = 280;
-          const newHeight = Math.max(200, Math.min(400, baseHeight * aspectRatio));
-          const rowSpan = Math.ceil((newHeight + 20) / 10);
-          
-          item.style.setProperty('--row-span', rowSpan);
-          item.classList.add('masonry');
+          // Remove any masonry properties
+          item.classList.remove('masonry');
+          item.style.removeProperty('--row-span');
           
           // Add reveal animation
           item.style.opacity = '0';
-          item.style.transform = 'translateY(30px) scale(0.9)';
+          item.style.transform = 'translateY(30px)';
           
           setTimeout(() => {
             item.style.opacity = '1';
-            item.style.transform = item.style.transform.replace('scale(0.9)', 'scale(1)');
+            item.style.transform = 'translateY(0)';
           }, 50);
           
-        }, index * 50);
+        }, index * 30);
       });
+
+      // Add twinkling stars to buttons
+      setTimeout(() => {
+        addButtonStars();
+      }, 500);
     }
 
     function enableGalleryView() {
@@ -949,6 +958,33 @@
           
         }, index * 30);
       });
+
+      // Remove button stars
+      removeButtonStars();
+    }
+
+    // Add twinkling stars to buttons in studio view
+    function addButtonStars() {
+      const buttons = document.querySelectorAll('.view-toggle');
+      buttons.forEach(button => {
+        // Add 3-5 stars per button
+        const starCount = Math.floor(Math.random() * 3) + 3;
+        for (let i = 0; i < starCount; i++) {
+          const star = document.createElement('div');
+          star.className = 'button-star';
+          star.style.left = Math.random() * 80 + 10 + '%';
+          star.style.top = Math.random() * 60 + 20 + '%';
+          star.style.animationDelay = Math.random() * 3 + 's';
+          star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+          button.appendChild(star);
+        }
+      });
+    }
+
+    // Remove stars from buttons
+    function removeButtonStars() {
+      const stars = document.querySelectorAll('.button-star');
+      stars.forEach(star => star.remove());
     }
 
     // Staggered image reveal animation
