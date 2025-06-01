@@ -544,8 +544,6 @@
       transition: opacity 0.3s ease, transform 0.2s ease;
       opacity: 0;
       pointer-events: none;
-      position: relative;
-      overflow: hidden;
     }
 
     body.studio-theme #backToTopBtn {
@@ -967,7 +965,7 @@
 
     // Add twinkling stars to buttons in studio view
     function addButtonStars() {
-      const buttons = document.querySelectorAll('.view-toggle, #backToTopBtn.show');
+      const buttons = document.querySelectorAll('.view-toggle');
       buttons.forEach(button => {
         addStarsToButton(button);
       });
@@ -987,28 +985,6 @@
       });
     }
 
-    // Back to top logic
-    const backToTopBtn = document.getElementById("backToTopBtn");
-    window.addEventListener("scroll", () => {
-      const shouldShow = window.scrollY > 300;
-      const wasVisible = backToTopBtn.classList.contains("show");
-      
-      backToTopBtn.classList.toggle("show", shouldShow);
-      
-      // Add stars to back to top button when it appears in studio view
-      if (shouldShow && !wasVisible && document.body.classList.contains('studio-theme')) {
-        setTimeout(() => {
-          if (backToTopBtn.querySelector('.button-star') === null) {
-            addStarsToButton(backToTopBtn);
-          }
-        }, 100);
-      }
-    });
-    
-    backToTopBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
     // Helper function to add stars to a single button
     function addStarsToButton(button) {
       const starCount = Math.floor(Math.random() * 3) + 3;
@@ -1022,6 +998,15 @@
         button.appendChild(star);
       }
     }
+
+    // Back to top logic
+    const backToTopBtn = document.getElementById("backToTopBtn");
+    window.addEventListener("scroll", () => {
+      backToTopBtn.classList.toggle("show", window.scrollY > 300);
+    });
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
 
     // Lightbox logic
     const lightbox = document.getElementById("lightboxOverlay");
