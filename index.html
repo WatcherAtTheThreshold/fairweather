@@ -1,11 +1,4 @@
-// Hide mobile bouncing label when scrolled
-        window.addEventListener('scroll', () => {
-            const label = document.querySelector('.mobile-gallery-label');
-            if (label) {
-                label.style.opacity = (window.scrollY > 50) ? '0' : '1';
-                label.style.transition = 'opacity 0.4s ease';
-            }
-        });<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,56 +13,12 @@
 
         body {
             font-family: 'Georgia', 'Times New Roman', serif;
-            background: linear-gradient(
-                to bottom,
-                rgba(25, 35, 70, 1) 0%,
-                rgba(15, 25, 60, 1) 30%,
-                rgba(10, 20, 50, 1) 100vh,
-                rgba(15, 25, 60, 1) 120vh,
-                rgba(20, 30, 65, 1) 140vh,
-                rgba(35, 45, 85, 1) 180vh,
-                rgba(45, 55, 95, 1) 200vh
-            );
-            background-attachment: fixed;
+            background: #0a0a0a;
             color: #e8e8e8;
             overflow-x: hidden;
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            min-height: 200vh;
-        }
-
-        /* Mist overlay backgrounds */
-        .mist-layer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.6;
-            background-size: cover;
-            background-position: center;
-            animation: mistFloat 25s ease-in-out infinite;
-        }
-
-        .mist-1 {
-            background-image: url('images/mist-tile.png');
-            animation-delay: 0s;
-        }
-
-        .mist-2 {
-            background-image: url('images/mist-tile.png');
-            animation-delay: -12s;
-            opacity: 0.5;
-        }
-
-        @keyframes mistFloat {
-            0%, 100% { transform: translateX(0px) translateY(0px) scale(1); }
-            25% { transform: translateX(-15px) translateY(-8px) scale(1.01); }
-            50% { transform: translateX(12px) translateY(-15px) scale(0.99); }
-            75% { transform: translateX(-8px) translateY(8px) scale(1.005); }
         }
 
         /* Floating particles animation */
@@ -614,8 +563,6 @@
     </style>
 </head>
 <body>
-    <div class="mist-layer mist-1"></div>
-    <div class="mist-layer mist-2"></div>
     
     <!-- Floating particles -->
     <div class="particles" id="particles"></div>
@@ -781,14 +728,8 @@
             });
         });
 
-        // Horizontal mist and mobile label fade
+        // Hide mobile bouncing label when scrolled
         window.addEventListener('scroll', () => {
-            const mist1 = document.querySelector('.mist-1');
-            const mist2 = document.querySelector('.mist-2');
-            if (mist1) mist1.style.transform = `translateX(${window.scrollY * 0.03}px)`;
-            if (mist2) mist2.style.transform = `translateX(${window.scrollY * 0.015}px)`;
-
-            // Hide mobile bouncing label when scrolled
             const label = document.querySelector('.mobile-gallery-label');
             if (label) {
                 label.style.opacity = (window.scrollY > 50) ? '0' : '1';
@@ -822,6 +763,7 @@
             
             // Ensure page starts at top on load
             window.scrollTo(0, 0);
+            
         });
     </script>
 </body>
