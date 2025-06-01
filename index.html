@@ -43,41 +43,30 @@
 
         .particle {
             position: absolute;
-            width: 3px;
-            height: 3px;
-            background: radial-gradient(circle, rgba(139, 69, 19, 0.9) 0%, rgba(160, 82, 45, 0.6) 50%, rgba(205, 133, 63, 0.3) 100%);
+            width: 2px;
+            height: 2px;
+            background: radial-gradient(circle, rgba(222, 184, 135, 0.9) 0%, rgba(222, 184, 135, 0.4) 50%, transparent 100%);
             border-radius: 50%;
-            animation: starburst 12s infinite linear;
-            box-shadow: 0 0 4px rgba(139, 69, 19, 0.6);
+            animation: twinkle 4s infinite ease-in-out;
+            box-shadow: 0 0 3px rgba(222, 184, 135, 0.6);
         }
 
-        @keyframes starburst {
-            0% {
-                transform: translateY(-50px) translateX(0) scale(0) rotate(0deg);
-                opacity: 0;
+        @keyframes twinkle {
+            0%, 100% { 
+                opacity: 0; 
+                transform: scale(0.3);
             }
-            5% {
-                opacity: 1;
-                transform: translateY(10vh) translateX(0) scale(1) rotate(45deg);
+            25% { 
+                opacity: 0.8; 
+                transform: scale(1);
             }
-            15% {
-                transform: translateY(25vh) translateX(20px) scale(1.2) rotate(90deg);
+            50% { 
+                opacity: 1; 
+                transform: scale(1.2);
             }
-            30% {
-                transform: translateY(40vh) translateX(-15px) scale(0.8) rotate(180deg);
-            }
-            50% {
-                transform: translateY(60vh) translateX(25px) scale(1.1) rotate(270deg);
-            }
-            70% {
-                transform: translateY(80vh) translateX(-10px) scale(0.9) rotate(360deg);
-            }
-            85% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) translateX(0) scale(0) rotate(450deg);
-                opacity: 0;
+            75% { 
+                opacity: 0.6; 
+                transform: scale(0.8);
             }
         }
 
@@ -139,6 +128,8 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             z-index: 2;
+            margin: 0;
+            padding: 0;
         }
 
         .hero-image {
@@ -146,6 +137,8 @@
             height: 100%;
             object-fit: cover;
             transition: all 0.5s ease;
+            margin: 0;
+            padding: 0;
         }
 
         .hero-image.left {
@@ -479,8 +472,11 @@
             /* Hide Ishtar on mobile, give Inanna diagonal clips in both corners */
             .hero-image.left {
                 clip-path: polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 15%);
-                object-position: left center;
-                transform: translateX(-15px);
+                object-position: center center;
+                transform: none;
+                width: 100vw;
+                margin: 0;
+                padding: 0;
             }
             
             .hero-image.right {
@@ -530,7 +526,10 @@
             /* Keep both corner clips on small screens */
             .hero-image.left {
                 clip-path: polygon(20% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 20%);
-                transform: translateX(-20px);
+                transform: none;
+                width: 100vw;
+                margin: 0;
+                padding: 0;
             }
             
             .hero-image.right {
@@ -675,17 +674,18 @@
     <button id="backToTopBtn" title="Back to Top">↑ Top</button>
 
     <script>
-        // Create floating particles
+        // Create twinkling star particles
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
-            const particleCount = 60;
+            const particleCount = 80;
             
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 4 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
                 particlesContainer.appendChild(particle);
             }
         }
